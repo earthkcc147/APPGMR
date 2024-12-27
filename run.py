@@ -53,4 +53,5 @@ def main_menu():
         main_menu()
 
 if __name__ == '__main__':
+    print_intro()
     login()
