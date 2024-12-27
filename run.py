@@ -30,9 +30,17 @@ def clear_console():
 
 
 def login():
-    print("กรุณากรอกข้อมูลสำหรับล็อคอิน")
+    print("กรุณากรอกข้อมูลสำหรับล็อคอิน หรือพิมพ์ 'exit' เพื่อลงจากระบบ")
+    
     username_input = input("Username: ")
+    if username_input.lower() == 'exit':
+        print(Fore.YELLOW + "ออกจากระบบแล้ว")
+        exit()
+
     password_input = getpass.getpass("Password: ")
+    if password_input.lower() == 'exit':
+        print(Fore.YELLOW + "ออกจากระบบแล้ว")
+        exit()
 
     # ตรวจสอบ username และ password
     if username_input in USERS and USERS[username_input]["password"] == password_input:
@@ -56,6 +64,7 @@ def main_menu():
         print(Fore.CYAN + "คุณเลือก รายการที่ 2")
     elif choice == '3':
         print(Fore.YELLOW + "ออกจากระบบแล้ว")
+        exit()  # ออกจากโปรแกรม
     else:
         print(Fore.RED + "ตัวเลือกไม่ถูกต้อง")
         main_menu()
