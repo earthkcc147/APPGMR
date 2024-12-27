@@ -30,19 +30,21 @@ def login():
     
     username_input = input("Username: ")
     if username_input.lower() == 'exit':
+        clear_console()
         print(Fore.YELLOW + "ออกจากระบบแล้ว")
         exit()
 
     password_input = getpass.getpass("Password: ")
     if password_input.lower() == 'exit':
+        clear_console()
         print(Fore.YELLOW + "ออกจากระบบแล้ว")
         exit()
 
     # ตรวจสอบ username และ password
     if username_input in USERS and USERS[username_input]["password"] == password_input:
+        clear_console()
         print(Fore.GREEN + "ล็อคอินสำเร็จ")
         return True
-        clear_console()
     else:
         print(Fore.RED + "ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง")
         return False
