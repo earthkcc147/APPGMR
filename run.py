@@ -1,25 +1,10 @@
 import os
-import json
-import getpass
-from dotenv import load_dotenv
 from colorama import init, Fore, Style
 from function.welcome import print_intro, print_logo
+from function.login import login  # นำเข้าฟังก์ชัน login จากไฟล์ login.py
 
 # เริ่มต้นการใช้งาน colorama
 init(autoreset=True)
-
-# โหลดค่าจากไฟล์ .env
-load_dotenv()
-
-# ดึงข้อมูล USERS จาก .env
-USERS_JSON = os.getenv('USERS')
-
-# ตรวจสอบและแปลงข้อมูล USERS
-try:
-    USERS = json.loads(USERS_JSON)
-except json.JSONDecodeError:
-    print(Fore.RED + "ไม่สามารถแปลงข้อมูล USERS จาก .env ได้ ❌")
-    exit()
 
 def clear_console():
     # ตรวจสอบว่ากำลังทำงานในระบบปฏิบัติการใด
@@ -28,27 +13,6 @@ def clear_console():
     else:  # Linux หรือ macOS หรือ Termux
         os.system('clear')
 
-
-def login():
-    print("กรุณากรอกข้อมูลสำหรับล็อคอิน หรือพิมพ์ 'exit' เพื่อลงจากระบบ")
-    
-    username_input = input("Username: ")
-    if username_input.lower() == 'exit':
-        print(Fore.YELLOW + "ออกจากระบบแล้ว")
-        exit()
-
-    password_input = getpass.getpass("Password: ")
-    if password_input.lower() == 'exit':
-        print(Fore.YELLOW + "ออกจากระบบแล้ว")
-        exit()
-
-    # ตรวจสอบ username และ password
-    if username_input in USERS and USERS[username_input]["password"] == password_input:
-        print(Fore.GREEN + "ล็อคอินสำเร็จ")
-        main_menu()
-    else:
-        print(Fore.RED + "ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง")
-        login()
 
 def main_menu():
     print("\nยินดีต้อนรับเข้าสู่ Main Menu")
@@ -69,7 +33,11 @@ def main_menu():
         print(Fore.RED + "ตัวเลือกไม่ถูกต้อง")
         main_menu()
 
+
 if __name__ == '__main__':
     clear_console()
     print_intro()
-    login()
+    
+    # เรียกใช้ฟังก์ชัน login และตรวจสอบการล็อคอิน
+    if login():
+        main_menu()
