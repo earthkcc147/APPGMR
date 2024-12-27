@@ -1,0 +1,19 @@
+# Ignore .env file
+.env
+
+# Ignore .json files (ถ้าไม่ต้องการให้ไฟล์ .json ถูกติดตาม)
+*.json
+.json
+
+# Ignore function folder (ถ้าไม่ต้องการให้ไฟล์ในโฟลเดอร์นี้ถูกติดตาม)
+function/
+
+# Ignore send folder (ถ้าไม่ต้องการให้ไฟล์ในโฟลเดอร์นี้ถูกติดตาม)
+send/
+
+# Ignore Python bytecode
+*.py
+.py
+*.pyc
+.pyc
+__pycache__/
