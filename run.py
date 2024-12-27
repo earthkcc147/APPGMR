@@ -3,6 +3,7 @@ import json
 import getpass
 from dotenv import load_dotenv
 from colorama import init, Fore, Style
+from function.welcome import print_intro, print_logo
 
 # เริ่มต้นการใช้งาน colorama
 init(autoreset=True)
