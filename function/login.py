@@ -17,6 +17,14 @@ except json.JSONDecodeError:
     print(Fore.RED + "ไม่สามารถแปลงข้อมูล USERS จาก .env ได้ ❌")
     exit()
 
+def clear_console():
+    # ตรวจสอบว่ากำลังทำงานในระบบปฏิบัติการใด
+    if os.name == 'nt':  # Windows
+        os.system('cls')
+    else:  # Linux หรือ macOS หรือ Termux
+        os.system('clear')
+
+
 def login():
     print("กรุณากรอกข้อมูลสำหรับล็อคอิน หรือพิมพ์ 'exit' เพื่อลงจากระบบ")
     
@@ -34,6 +42,7 @@ def login():
     if username_input in USERS and USERS[username_input]["password"] == password_input:
         print(Fore.GREEN + "ล็อคอินสำเร็จ")
         return True
+        clear_console()
     else:
         print(Fore.RED + "ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง")
         return False
