@@ -7,6 +7,7 @@
 
 # Ignore function folder (ถ้าไม่ต้องการให้ไฟล์ในโฟลเดอร์นี้ถูกติดตาม)
 function/
+/function
 
 # Ignore send folder (ถ้าไม่ต้องการให้ไฟล์ในโฟลเดอร์นี้ถูกติดตาม)
 send/
