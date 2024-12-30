@@ -25,7 +25,7 @@ def show_sms_menu():
                 break
             elif sms_choice == 1: 
                 print("กำลังรันไฟล์ sms.py...")
-                subprocess.run(["python3", "function/sms/sms.py"])
+                subprocess.run(["python3", "function/sms/sms1.py"])
             else:
                 print("❌ ตัวเลือกไม่ถูกต้อง กรุณาลองอีกครั้ง!")
         except ValueError:
