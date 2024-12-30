@@ -1,9 +1,12 @@
 import os
 import json
 import getpass
-from colorama import Fore
+from colorama import Fore, Back, Style, init
 from dotenv import load_dotenv
 from function.welcome import print_intro, print_logo, print_login
+
+# เริ่มต้นการใช้งาน colorama
+init(autoreset=True)
 
 # โหลดค่าจากไฟล์ .env
 load_dotenv()
@@ -28,25 +31,26 @@ def clear_console():
 
 def login():
     print_login()
-    print("กรุณากรอกข้อมูลสำหรับล็อคอิน หรือพิมพ์ 'exit' เพื่อลงจากระบบ")
-    
-    username_input = input("Username: ")
+    print(Fore.CYAN + "กรุณากรอกข้อมูลสำหรับล็อคอิน หรือพิมพ์ 'exit' เพื่อลงจากระบบ")
+
+    username_input = input(Fore.YELLOW + "Username: ")
     if username_input.lower() == 'exit':
         clear_console()
-        print(Fore.YELLOW + "ออกจากระบบแล้ว")
+        print(Fore.YELLOW + "ออกจากระบบแล้ว 🚪")
         exit()
 
-    password_input = getpass.getpass("Password: ")
+    password_input = getpass.getpass(Fore.YELLOW + "Password: ")
     if password_input.lower() == 'exit':
         clear_console()
-        print(Fore.YELLOW + "ออกจากระบบแล้ว")
+        print(Fore.YELLOW + "ออกจากระบบแล้ว 🚪")
         exit()
 
     # ตรวจสอบ username และ password
     if username_input in USERS and USERS[username_input]["password"] == password_input:
         clear_console()
-        print(Fore.GREEN + "ล็อคอินสำเร็จ")
+        print(Fore.GREEN + "ล็อคอินสำเร็จ ✅")
+        print(Fore.GREEN + "ยินดีต้อนรับ, " + username_input + " 🎉")
         return True
     else:
-        print(Fore.RED + "ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง")
+        print(Fore.RED + "ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง ❌")
         return False
