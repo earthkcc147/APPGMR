@@ -11,7 +11,7 @@ def main_menu():
     choice = input("กรุณาเลือกตัวเลือก: ")
 
     if choice == '1':
-        print(Fore.CYAN + "คุณเลือก รายการที่ 1")
+        show_sms_menu()
     elif choice == '2':
         print(Fore.CYAN + "คุณเลือก รายการที่ 2")
     elif choice == '3':
