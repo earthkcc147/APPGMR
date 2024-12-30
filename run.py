@@ -3,7 +3,7 @@ from colorama import init, Fore, Style
 from function.welcome import print_intro, print_logo
 from function.login import login  # นำเข้าฟังก์ชัน login จากไฟล์ login.py
 from function.main_menu import main_menu  # นำเข้าฟังก์ชัน main_menu จากไฟล์ main_menu.py
-
+from function.send.disget import 
 # เริ่มต้นการใช้งาน colorama
 init(autoreset=True)
 
