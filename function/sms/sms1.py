@@ -42,10 +42,10 @@ async def home():
                           [https://discord.com/invite/hSbDP5Rmc8] 
         ''')
         phone = input(" \x1b[96m[PHONE-NUMBER]  : \x1b[92m")
- # ตรวจสอบว่าเป็นหมายเลข 00 หรือไม่
- if phone == "00":
-     print("\x1b[91mโปรแกรมหยุดทำงาน เนื่องจากหมายเลขเป็น 00\x1b[00m")
-     break  # หยุดการทำงานของโปรแกรม
+        # ตรวจสอบว่าเป็นหมายเลข 00 หรือไม่
+        if phone == "00":
+            print("\x1b[91mโปรแกรมหยุดทำงาน เนื่องจากหมายเลขเป็น 00\x1b[00m")
+            break  # หยุดการทำงานของโปรแกรม
 
         if int(phone) <= 99999999 or int(phone) >= 999999999:
                 print()
