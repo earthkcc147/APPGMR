@@ -40,6 +40,7 @@ if __name__ == '__main__':
     
     # รอการกด Enter เพื่อดำเนินการต่อ
     input(Fore.GREEN + "\nกด Enter เพื่อดำเนินการต่อ...")
+    clear_console()
 
     # เรียกใช้ฟังก์ชัน login และตรวจสอบการล็อคอิน
     if login():
