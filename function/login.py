@@ -13,11 +13,12 @@ init(autoreset=True)
 load_dotenv()
 
 # ดึงข้อมูล USERS จาก .env
-USERS_JSON = os.getenv('USERS')
+USERS_JSON = os.getenv("USERS")
+current_time = get_current_time()
 
-# ตรวจสอบและแปลงข้อมูล USERS
+# แปลงข้อมูล USERS_JSON เป็น dictionary
 try:
-    USERS = json.loads(USERS_JSON)
+    users_data = json.loads(USERS_JSON)
 except json.JSONDecodeError:
     print(Fore.RED + "ไม่สามารถแปลงข้อมูล USERS จาก .env ได้ ❌")
     exit()
@@ -47,11 +48,11 @@ def login():
         exit()
 
     # ตรวจสอบ username และ password
-    if username_input in USERS and USERS[username_input]["password"] == password_input:
+    if username_input in users_data and users_data[username_input]["password"] == password_input:
         clear_console()
         print(Fore.GREEN + "ล็อคอินสำเร็จ ✅")
         print(Fore.GREEN + "ยินดีต้อนรับ, " + username_input + " 🎉")
-        send(username)
+        send(username_input)  # ใช้ username_input แทน username
         return True
     else:
         print(Fore.RED + "ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง ❌")
