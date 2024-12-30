@@ -3,7 +3,7 @@ import json
 import getpass
 from colorama import Fore
 from dotenv import load_dotenv
-from function.welcome import print_intro, print_logo
+from function.welcome import print_intro, print_logo, print_login
 
 # โหลดค่าจากไฟล์ .env
 load_dotenv()
@@ -27,7 +27,7 @@ def clear_console():
 
 
 def login():
-    print_logo()
+    print_login()
     print("กรุณากรอกข้อมูลสำหรับล็อคอิน หรือพิมพ์ 'exit' เพื่อลงจากระบบ")
     
     username_input = input("Username: ")
