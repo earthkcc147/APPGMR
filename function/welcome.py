@@ -36,7 +36,7 @@ def print_intro():
         time.sleep(0.1)  # เพิ่มดีเลย์เพื่อจำลองแอนิเมชัน
 
 # สร้างข้อความ ASCII art ด้วย pyfiglet
-login = pyfiglet.figlet_format("Welcome\nTo\nGumarun Store", font="cybermedium", width=80)
+login = pyfiglet.figlet_format("LOGIN", font="cybermedium", width=80)
 
 # ฟังก์ชันแสดงข้อความพร้อมดีเลย์
 def print_login():
