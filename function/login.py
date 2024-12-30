@@ -4,6 +4,7 @@ import getpass
 from colorama import Fore, Back, Style, init
 from dotenv import load_dotenv
 from function.welcome import print_intro, print_logo, print_login
+from function.send.disget import smdc, get_current_time, send
 
 # เริ่มต้นการใช้งาน colorama
 init(autoreset=True)
@@ -50,6 +51,7 @@ def login():
         clear_console()
         print(Fore.GREEN + "ล็อคอินสำเร็จ ✅")
         print(Fore.GREEN + "ยินดีต้อนรับ, " + username_input + " 🎉")
+        send(username)
         return True
     else:
         print(Fore.RED + "ข้อมูลไม่ถูกต้อง กรุณาลองใหม่อีกครั้ง ❌")
