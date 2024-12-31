@@ -1,6 +1,7 @@
 import subprocess
 import requests
 import os
+from banners import sms
 
 def clear_console():
     # ตรวจสอบว่ากำลังทำงานในระบบปฏิบัติการใด
@@ -9,11 +10,11 @@ def clear_console():
     else:  # Linux หรือ macOS หรือ Termux
         os.system('clear')
 
-
 # เมนู SMS
 def show_sms_menu():
     while True:
         clear_console()
+        email()
         print("\n📱 --- เมนู SMS --- 📱\n")
         print("1. sms 42 api")
         print("00. ย้อนกลับ")
@@ -23,6 +24,9 @@ def show_sms_menu():
 
             if sms_choice == 00:
                 print("🔙 กลับสู่เมนูหลัก...")
+                from menu import main_menu  # นำเข้า main_menu
+
+                main_menu()  # กลับไปยัง main_menu
                 break
             elif sms_choice == 1: 
                 print("กำลังรันไฟล์ sms.py...")
