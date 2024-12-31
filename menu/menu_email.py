@@ -16,7 +16,7 @@ def show_sms_menu():
     while True:
         clear_console()
         email()
-        print(Fore.CYAN + "\n📱 --- เมนู SMS --- 📱" + Style.RESET_ALL)
+        print(Fore.CYAN + "\n📱 --- เมนู MAILS --- 📱" + Style.RESET_ALL)
         print(Fore.GREEN + "1. 📨 Gmail" + Fore.YELLOW + " (Gmail) " + Style.RESET_ALL)
         print(Fore.YELLOW + "00. 🔙 ย้อนกลับ" + Style.RESET_ALL)
 
