@@ -732,250 +732,247 @@ tool_cmd   = [
 # Tool Responses (Begins) [Responses + Severity (c - critical | h - high | m - medium | l - low | i - informational) + Reference for Vuln Definition and Remediation]
 tool_resp   = [
                 #1
-                ["Does not have an IPv6 Address. It is good to have one.","i",1],
+                ["ไม่มีที่อยู่ IPv6. ควรมีที่อยู่ IPv6.","i",1],
 
                 #2
-                ["ASP.Net is misconfigured to throw server stack errors on screen.","m",2],
+                ["ASP.Net ตั้งค่าไม่ถูกต้องในการแสดงข้อผิดพลาดของเซิร์ฟเวอร์บนหน้าจอ.","m",2],
 
                 #3
-                ["WordPress Installation Found. Check for vulnerabilities corresponds to that version.","i",3],
+                ["พบการติดตั้ง WordPress. ตรวจสอบช่องโหว่ที่เกี่ยวข้องกับเวอร์ชันนั้น.","i",3],
 
                 #4
-                ["Drupal Installation Found. Check for vulnerabilities corresponds to that version.","i",4],
+                ["พบการติดตั้ง Drupal. ตรวจสอบช่องโหว่ที่เกี่ยวข้องกับเวอร์ชันนั้น.","i",4],
 
                 #5
-                ["Joomla Installation Found. Check for vulnerabilities corresponds to that version.","i",5],
+                ["พบการติดตั้ง Joomla. ตรวจสอบช่องโหว่ที่เกี่ยวข้องกับเวอร์ชันนั้น.","i",5],
 
                 #6
-                ["robots.txt/sitemap.xml found. Check those files for any information.","i",6],
+                ["พบไฟล์ robots.txt/sitemap.xml. ตรวจสอบไฟล์เหล่านั้นสำหรับข้อมูลใดๆ.","i",6],
 
                 #7
-                ["No Web Application Firewall Detected","m",7],
+                ["ไม่พบ Web Application Firewall.","m",7],
 
                 #8
-                ["Some ports are open. Perform a full-scan manually.","l",8],
+                ["บางพอร์ตเปิดอยู่. กรุณาทำการสแกนเต็มด้วยตัวเอง.","l",8],
 
                 #9
-                ["Email Addresses Found.","l",9],
+                ["พบที่อยู่อีเมล.","l",9],
 
                 #10
-                ["Zone Transfer Successful using DNSRecon. Reconfigure DNS immediately.","h",10],
+                ["การถ่ายโอนโซนสำเร็จโดยใช้ DNSRecon. กรุณาปรับการตั้งค่า DNS ทันที.","h",10],
 
                 #11
-                #["Zone Transfer Successful using fierce. Reconfigure DNS immediately.","h",10],
+                #["การถ่ายโอนโซนสำเร็จโดยใช้ fierce. กรุณาปรับการตั้งค่า DNS ทันที.","h",10],
 
                 #12
-                ["Zone Transfer Successful using dnswalk. Reconfigure DNS immediately.","h",10],
+                ["การถ่ายโอนโซนสำเร็จโดยใช้ dnswalk. กรุณาปรับการตั้งค่า DNS ทันที.","h",10],
 
                 #13
-                ["Whois Information Publicly Available.","i",11],
+                ["ข้อมูล Whois เป็นสาธารณะ.","i",11],
 
                 #14
-                ["XSS Protection Filter is Disabled.","m",12],
+                ["ตัวกรอง XSS ถูกปิดการใช้งาน.","m",12],
 
                 #15
-                ["Vulnerable to Slowloris Denial of Service.","c",13],
+                ["ช่องโหว่ Vulnerable to Slowloris Denial of Service.","c",13],
 
                 #16
-                ["HEARTBLEED Vulnerability Found with SSLyze.","h",14],
+                ["พบช่องโหว่ HEARTBLEED โดยใช้ SSLyze.","h",14],
 
                 #17
-                ["HEARTBLEED Vulnerability Found with Nmap.","h",14],
+                ["พบช่องโหว่ HEARTBLEED โดยใช้ Nmap.","h",14],
 
                 #18
-                ["POODLE Vulnerability Detected.","h",15],
+                ["พบช่องโหว่ POODLE.","h",15],
 
                 #19
-                ["OpenSSL CCS Injection Detected.","h",16],
+                ["พบช่องโหว่ OpenSSL CCS Injection.","h",16],
 
                 #20
-                ["FREAK Vulnerability Detected.","h",17],
+                ["พบช่องโหว่ FREAK.","h",17],
 
                 #21
-                ["LOGJAM Vulnerability Detected.","h",18],
+                ["พบช่องโหว่ LOGJAM.","h",18],
 
                 #22
-                ["Unsuccessful OCSP Response.","m",19],
+                ["การตอบกลับ OCSP ไม่สำเร็จ.","m",19],
 
                 #23
-                ["Server supports Deflate Compression.","m",20],
+                ["เซิร์ฟเวอร์รองรับ Deflate Compression.","m",20],
 
                 #24
-                ["Secure Client Initiated Renegotiation is supported.","m",21],
+                ["รองรับการต่อรองแบบปลอดภัยจากฝั่งคลไคลเอนต์.","m",21],
 
                 #25
-                ["Secure Resumption unsupported with (Sessions IDs/TLS Tickets).","m",22],
+                ["ไม่รองรับการเริ่มต้นใหม่แบบปลอดภัย (Session IDs/TLS Tickets).","m",22],
 
                 #26
-                ["No DNS/HTTP based Load Balancers Found.","l",23],
+                ["ไม่พบ DNS/HTTP Load Balancer.","l",23],
 
                 #27
-                ["Domain is spoofed/hijacked.","h",24],
+                ["โดเมนถูกปลอมแปลงหรือถูกขโมย.","h",24],
 
                 #28
-                ["HEARTBLEED Vulnerability Found with Golismero.","h",14],
+                ["พบช่องโหว่ HEARTBLEED โดยใช้ Golismero.","h",14],
 
                 #29
-                ["Open Files Found with Golismero BruteForce.","m",25],
+                ["พบไฟล์เปิดกับ Golismero BruteForce.","m",25],
 
                 #30
-                ["Open Directories Found with Golismero BruteForce.","m",26],
+                ["พบไดเรกทอรีเปิดกับ Golismero BruteForce.","m",26],
 
                 #31
-                ["DB Banner retrieved with SQLMap.","l",27],
+                ["ดึงแบนเนอร์ฐานข้อมูลได้จาก SQLMap.","l",27],
 
                 #32
-                ["Open Directories Found with DirB.","m",26],
+                ["พบไดเรกทอรีเปิดกับ DirB.","m",26],
 
                 #33
-                ["XSSer found XSS vulnerabilities.","c",28],
+                ["พบช่องโหว่ XSS โดย XSSer.","c",28],
 
                 #34
-                ["Found SSL related vulnerabilities with Golismero.","m",29],
+                ["พบช่องโหว่ SSL ที่เกี่ยวข้องกับ Golismero.","m",29],
 
                 #35
-                ["Zone Transfer Successful with Golismero. Reconfigure DNS immediately.","h",10],
+                ["การถ่ายโอนโซนสำเร็จด้วย Golismero. กรุณาปรับการตั้งค่า DNS ทันที.","h",10],
 
                 #36
-                ["Golismero Nikto Plugin found vulnerabilities.","m",30],
+                ["พบช่องโหว่ใน Golismero Nikto Plugin.","m",30],
 
                 #37
-                ["Found Subdomains with Golismero.","m",31],
+                ["พบ Subdomains โดยใช้ Golismero.","m",31],
 
                 #38
-                ["Zone Transfer Successful using DNSEnum. Reconfigure DNS immediately.","h",10],
+                ["การถ่ายโอนโซนสำเร็จโดยใช้ DNSEnum. กรุณาปรับการตั้งค่า DNS ทันที.","h",10],
 
                 #39
-                ["Found Subdomains with Fierce.","m",31],
+                ["พบ Subdomains โดยใช้ Fierce.","m",31],
 
                 #40
-                ["Email Addresses discovered with DMitry.","l",9],
+                ["พบที่อยู่อีเมลด้วย DMitry.","l",9],
 
                 #41
-                ["Subdomains discovered with DMitry.","m",31],
+                ["พบ Subdomains ด้วย DMitry.","m",31],
 
                 #42
-                ["Telnet Service Detected.","h",32],
+                ["พบบริการ Telnet.","h",32],
 
                 #43
-                ["FTP Service Detected.","c",33],
+                ["พบบริการ FTP.","c",33],
 
                 #44
-                ["Vulnerable to STUXNET.","c",34],
+                ["ช่องโหว่ STUXNET.","c",34],
 
                 #45
-                ["WebDAV Enabled.","m",35],
+                ["พบการเปิดใช้งาน WebDAV.","m",35],
 
                 #46
-                ["Found some information through Fingerprinting.","l",36],
+                ["พบข้อมูลบางอย่างผ่านการระบุลักษณะของระบบ.","l",36],
 
                 #47
-                ["Open Files Found with Uniscan.","m",25],
+                ["พบไฟล์เปิดด้วย Uniscan.","m",25],
 
                 #48
-                ["Open Directories Found with Uniscan.","m",26],
+                ["พบไดเรกทอรีเปิดด้วย Uniscan.","m",26],
 
                 #49
-                ["Vulnerable to Stress Tests.","h",37],
+                ["ช่องโหว่ต่อการทดสอบ Stress.","h",37],
 
                 #50
-                ["Uniscan detected possible LFI, RFI or RCE.","h",38],
+                ["Uniscan พบช่องโหว่ LFI, RFI หรือ RCE.","h",38],
 
                 #51
-                ["Uniscan detected possible XSS, SQLi, BSQLi.","h",39],
+                ["Uniscan พบช่องโหว่ XSS, SQLi, BSQLi.","h",39],
 
                 #52
-                ["Apache Expect XSS Header not present.","m",12],
+                ["Header 'Expect' สำหรับ XSS ไม่พบใน Apache.","m",12],
 
                 #53
-                ["Found Subdomains with Nikto.","m",31],
+                ["พบ Subdomains โดยใช้ Nikto.","m",31],
 
                 #54
-                ["Webserver vulnerable to Shellshock Bug.","c",40],
+                ["เซิร์ฟเวอร์เว็บมีช่องโหว่จาก Shellshock Bug.","c",40],
 
                 #55
-                ["Webserver leaks Internal IP.","l",41],
+                ["เซิร์ฟเวอร์เว็บเผยแพร่ IP ภายใน.","l",41],
 
                 #56
-                ["HTTP PUT DEL Methods Enabled.","m",42],
+                ["พบการเปิดใช้ HTTP PUT DEL Methods.","m",42],
 
                 #57
-                ["Some vulnerable headers exposed.","m",43],
+                ["พบ Headers ที่เปราะบางเปิดเผย.","m",43],
 
                 #58
-                ["Webserver vulnerable to MS10-070.","h",44],
+                ["เซิร์ฟเวอร์เว็บมีช่องโหว่จาก MS10-070.","h",44],
 
                 #59
-                ["Some issues found on the Webserver.","m",30],
+                ["พบปัญหาบางอย่างบนเซิร์ฟเวอร์เว็บ.","m",30],
 
                 #60
-                ["Webserver is Outdated.","h",45],
+                ["เซิร์ฟเวอร์เว็บล้าสมัย.","h",45],
 
                 #61
-                ["Some issues found with HTTP Options.","l",42],
+                ["พบปัญหากับ HTTP Options.","l",42],
 
                 #62
-                ["CGI Directories Enumerated.","l",26],
+                ["พบ CGI Directories ที่สามารถระบุได้.","l",26],
 
                 #63
-                ["Vulnerabilities reported in SSL Scans.","m",29],
+                ["พบช่องโหว่ใน SSL Scan.","m",29],
 
                 #64
-                ["Interesting Files Detected.","m",25],
+                ["พบไฟล์ที่น่าสนใจ.","m",25],
 
                 #65
-                ["Injectable Paths Detected.","l",46],
+                ["พบเส้นทางที่สามารถฉีดเข้าได้.","l",46],
 
                 #66
-                ["Found Subdomains with DNSMap.","m",31],
+                ["พบ Subdomains ด้วย DNSMap.","m",31],
 
                 #67
-                ["MS-SQL DB Service Detected.","l",47],
+                ["พบบริการ MS-SQL DB.","l",47],
 
                 #68
-                ["MySQL DB Service Detected.","l",47],
+                ["พบบริการ MySQL DB.","l",47],
 
                 #69
-                ["ORACLE DB Service Detected.","l",47],
+                ["พบบริการ ORACLE DB.","l",47],
 
                 #70
-                ["RDP Server Detected over UDP.","h",48],
+                ["พบ RDP Server ผ่าน UDP.","h",48],
 
                 #71
-                ["RDP Server Detected over TCP.","h",48],
+                ["พบ RDP Server ผ่าน TCP.","h",48],
 
                 #72
-                ["TCP Ports are Open","l",8],
+                ["พบพอร์ต TCP เปิดอยู่","l",8],
 
                 #73
-                ["UDP Ports are Open","l",8],
+                ["พบพอร์ต UDP เปิดอยู่","l",8],
 
                 #74
-                ["SNMP Service Detected.","m",49],
+                ["พบบริการ SNMP.","m",49],
 
                 #75
-                ["Elmah is Configured.","m",50],
+                ["พบการตั้งค่า Elmah.","m",50],
 
                 #76
-                ["SMB Ports are Open over TCP","m",51],
+                ["พบพอร์ต SMB เปิดอยู่ผ่าน TCP","m",51],
 
                 #77
-                ["SMB Ports are Open over UDP","m",51],
+                ["พบพอร์ต SMB เปิดอยู่ผ่าน UDP","m",51],
 
                 #78
-                ["Wapiti discovered a range of vulnerabilities","h",30],
+                ["Wapiti พบช่องโหว่หลากหลาย","h",30],
 
                 #79
-                ["IIS WebDAV is Enabled","m",35],
+                ["พบการเปิดใช้ IIS WebDAV","m",35],
 
                 #80
-                ["X-XSS Protection is not Present","m",12],
+                ["ไม่มีการป้องกัน X-XSS Protection","m",12],
 
                 #81
-                ["Found Subdomains with AMass","m",31]
-
-
-
+                ["พบ Subdomains โดยใช้ AMass","m",31]
             ]
 
 # Tool Responses (Ends)
