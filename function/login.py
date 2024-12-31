@@ -3,7 +3,7 @@ import json
 import getpass
 from colorama import Fore, Back, Style, init
 from dotenv import load_dotenv
-from function.welcome import print_intro, print_logo, print_login
+from banners.welcome import print_intro, print_logo, print_login
 from function.send.disget import smdc, get_current_time, send
 
 # เริ่มต้นการใช้งาน colorama
