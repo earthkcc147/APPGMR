@@ -17,8 +17,8 @@ def show_ip_menu():
         clear_console()
         ip()
         print(Fore.CYAN + "\n📱 --- เมนู ddos & float --- 📱" + Style.RESET_ALL)
-        print(Fore.GREEN + "1. 📨 message" + Fore.YELLOW + " (ข้อความ) " + Style.RESET_ALL)
-        print(Fore.GREEN + "2. 💭 comment" + Fore.YELLOW + " (คอมเม้นท์) " + Style.RESET_ALL)
+        print(Fore.GREEN + "1. 🌏 Ddos & Float1" + Fore.YELLOW + " (ข้อความ) " + Style.RESET_ALL)
+        print(Fore.GREEN + "2. 🌎 Ddos & Float2" + Fore.YELLOW + " (คอมเม้นท์) " + Style.RESET_ALL)
         print(Fore.YELLOW + "00. 🔙 ย้อนกลับ" + Style.RESET_ALL)
 
         try:
@@ -32,10 +32,10 @@ def show_ip_menu():
                 break
             elif sms_choice == 1: 
                 print(Fore.GREEN + "กำลังรันไฟล์..." + Style.RESET_ALL)
-                subprocess.run(["python3", "function/facebook/message.py"])
+                subprocess.run(["python3", "function/ip/ip1.py"])
             elif sms_choice == 2: 
                 print(Fore.GREEN + "กำลังรันไฟล์..." + Style.RESET_ALL)
-                subprocess.run(["python3", "function/facebook/message2.py"])
+                subprocess.run(["python3", "function/ip/ip2.py"])
 
 
             else:
