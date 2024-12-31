@@ -2,11 +2,15 @@ import subprocess
 import sys
 
 # กำหนดโมดูลที่ต้องการติดตั้งในตัวแปร modules
-modules = ['selenium', 'pyperclip', 'mechanize', 'beautifulsoup4']
+modules = ['selenium', 'pyperclip', 'mechanize', 'beautifulsoup4', 'pyinstaller']
 
 # ฟังก์ชันติดตั้งโมดูล
 def install_package(package):
-    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+    try:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+        print(f"{package} ติดตั้งสำเร็จ.")
+    except Exception as e:
+        print(f"ไม่สามารถติดตั้ง {package} ได้: {e}")
 
 # ตรวจสอบและติดตั้งโมดูล
 for module in modules:
