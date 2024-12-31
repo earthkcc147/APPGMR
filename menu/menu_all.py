@@ -15,6 +15,17 @@ def unicode_length(text):
     return sum(2 if unicodedata.east_asian_width(c) in 'WF' else 1 for c in text)
 
 
+def get_terminal_width():
+    """ดึงขนาดความกว้างของหน้าจอคอนโซล"""
+    try:
+        # ตรวจสอบขนาดหน้าจอ
+        size = os.get_terminal_size()
+        return size.columns
+    except OSError:
+        # หากไม่สามารถดึงข้อมูลได้ (ในบางระบบ) ให้ใช้ขนาดค่าปกติ
+        return 80
+
+
 def menu_all():
     clear_console()
 
@@ -46,9 +57,14 @@ def menu_all():
         ("❓ Help", "คำถามที่พบบ่อย"),
     ]
 
-    # กำหนดจำนวนแถวและความกว้าง
-    rows_per_column = 10
-    fixed_width = 35  # ปรับความกว้างคงที่ให้เพียงพอ
+    # ดึงขนาดหน้าจอ
+    terminal_width = get_terminal_width()
+
+    # คำนวณขนาดความกว้างของแต่ละคอลัมน์ตามขนาดหน้าจอ
+    fixed_width = min(35, terminal_width // 2)  # ปรับขนาดคอลัมน์ให้พอดีกับขนาดหน้าจอ
+
+    # กำหนดจำนวนแถว
+    rows_per_column = 7
     columns = -(-len(menu_options) // rows_per_column)
 
     # วนลูปเพื่อแสดงเมนู
@@ -98,8 +114,3 @@ def menu_all():
 # เรียกใช้งานฟังก์ชันเมนู
 if __name__ == "__main__":
     menu_all()
-
-
-
-
-เพิ่มให้มีการคำนวณขนาดหน้าจออัตโนมัติด้วย
