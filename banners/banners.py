@@ -45,12 +45,12 @@ def sms():
 
 
 # สร้างข้อความ ASCII art ด้วย pyfiglet
-GMAIL = pyfiglet.figlet_format("GMAIL", font="calvin_s", width=80)
+EMAIL = pyfiglet.figlet_format("SPAM MAIL", font="calvin_s", width=80)
 
 # ฟังก์ชันแสดงข้อความพร้อมดีเลย์
 def gmail():
     # ใช้ center_text เพื่อจัดข้อความให้อยู่ตรงกลาง
-    centered_intro = center_text(GMAIL)
+    centered_intro = center_text(EMAIL)
     for line in centered_intro.splitlines():
         print(Fore.YELLOW + line)  # ทำให้ข้อความเป็นสีเหลือง
         time.sleep(0.1)  # เพิ่มดีเลย์เพื่อจำลองแอนิเมชัน
