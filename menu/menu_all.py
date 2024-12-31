@@ -60,7 +60,7 @@ def menu_all():
     fixed_width = terminal_width // 2  # ปรับให้กว้างพอดีกับหน้าจอ
 
     # กำหนดจำนวนแถวและคอลัมน์
-    rows_per_column = 10
+    rows_per_column = 7
     columns = -(-len(menu_options) // rows_per_column)
 
     # วนลูปเพื่อแสดงเมนู
