@@ -23,8 +23,8 @@ if __name__ == '__main__':
     # รอการกด Enter เพื่อดำเนินการต่อ
     input(Fore.GREEN + "\nกด Enter เพื่อดำเนินการต่อ...")
     clear_console()
-    main_menu()
+    # main_menu()
 
     # เรียกใช้ฟังก์ชัน login และตรวจสอบการล็อคอิน
-    # if login():
-        # main_menu()  # เรียกใช้ฟังก์ชัน main_menu
+    if login():
+        main_menu()  # เรียกใช้ฟังก์ชัน main_menu
