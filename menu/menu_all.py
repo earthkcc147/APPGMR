@@ -48,7 +48,7 @@ def menu_all():
 
     # กำหนดจำนวนแถวและความกว้าง
     rows_per_column = 7
-    fixed_width = 35  # ปรับความกว้างคงที่ให้เพียงพอ
+    fixed_width = 25  # ปรับความกว้างคงที่ให้เพียงพอ
     columns = -(-len(menu_options) // rows_per_column)
 
     # วนลูปเพื่อแสดงเมนู
