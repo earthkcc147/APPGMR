@@ -1,7 +1,19 @@
 from colorama import Fore, Back, Style
 import time
 
+
+
+def clear_console():
+    # ตรวจสอบว่ากำลังทำงานในระบบปฏิบัติการใด
+    if os.name == 'nt':  # Windows
+        os.system('cls')
+    else:  # Linux หรือ macOS หรือ Termux
+        os.system('clear')
+
+
 def main_menu():
+    clear_console()
+
     # แสดงข้อความยินดีต้อนรับ
     print(Fore.CYAN + Back.BLACK + Style.BRIGHT + "\nยินดีต้อนรับเข้าสู่ Main Menu" + Style.RESET_ALL)
 
