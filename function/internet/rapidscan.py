@@ -1563,7 +1563,7 @@ elif args_namespace.target:
                 temp_report.close()
                 rs_vul = rs_vul + 1
 
-            print("\tComplete Vulnerability Report for "+bcolors.OKBLUE+target+bcolors.ENDC+" named "+bcolors.OKGREEN+vulreport+bcolors.ENDC+" is available under the same directory RapidScan resides.")
+            print("\tรายงานช่องโหว่ทั้งหมดสำหรับ "+bcolors.OKBLUE+target+bcolors.ENDC+" ชื่อ "+bcolors.OKGREEN+vulreport+bcolors.ENDC+" สามารถดูได้ในไดเรกทอรีเดียวกับที่ RapidScan ตั้งอยู่.")
 
         report.close()
     # Writing all scan files output into RS-Debug-ScanLog for debugging purposes.
