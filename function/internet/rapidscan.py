@@ -1354,21 +1354,21 @@ def get_parser():
     return parser
 
 
-# Shuffling Scan Order (starts)
+# การสุ่มลำดับการสแกน (เริ่มต้น)
 scan_shuffle = list(zip(tool_names, tool_cmd, tool_resp, tool_status))
 random.shuffle(scan_shuffle)
 tool_names, tool_cmd, tool_resp, tool_status = zip(*scan_shuffle)
-tool_checks = (len(tool_names) + len(tool_resp) + len(tool_status)) / 3 # Cross verification incase, breaks.
+tool_checks = (len(tool_names) + len(tool_resp) + len(tool_status)) / 3 # การตรวจสอบข้ามกรณี ถ้ามีข้อผิดพลาด
 tool_checks = round(tool_checks)
-# Shuffling Scan Order (ends)
+# การสุ่มลำดับการสแกน (สิ้นสุด)
 
-# Tool Head Pointer: (can be increased but certain tools will be skipped)
+# ตัวชี้หัวเครื่องมือ: (สามารถเพิ่มได้ แต่บางเครื่องมือจะถูกข้าม)
 tool = 0
 
-# Run Test
+# รันการทดสอบ
 runTest = 1
 
-# For accessing list/dictionary elements
+# สำหรับการเข้าถึงรายการ/ดิกชันนารี
 arg1 = 0
 arg2 = 1
 arg3 = 2
@@ -1376,18 +1376,18 @@ arg4 = 3
 arg5 = 4
 arg6 = 5
 
-# Detected Vulnerabilities [will be dynamically populated]
+# ช่องโหว่ที่ตรวจพบ [จะถูกเติมข้อมูลตามต้องการ]
 rs_vul_list = list()
 rs_vul_num = 0
 rs_vul = 0
 
-# Total Time Elapsed
+# เวลารวมที่ใช้ไป
 rs_total_elapsed = 0
 
-# Tool Pre Checker
+# ตัวตรวจสอบเครื่องมือ
 rs_avail_tools = 0
 
-# Checks Skipped
+# การข้ามการตรวจสอบ
 rs_skipped_checks = 0
 
 if len(sys.argv) == 1:
@@ -1406,12 +1406,12 @@ if args_namespace.help or (not args_namespace.update \
     helper()
 elif args_namespace.update:
     logo()
-    print("RapidScan is updating....Please wait.\n")
+    print("RapidScan กำลังอัปเดต....กรุณารอสักครู่.\n")
     spinner.start()
-    # Checking internet connectivity first...
+    # ตรวจสอบการเชื่อมต่ออินเทอร์เน็ตก่อน...
     rs_internet_availability = check_internet()
     if rs_internet_availability == 0:
-        print("\t"+ bcolors.BG_ERR_TXT + "There seems to be some problem connecting to the internet. Please try again or later." +bcolors.ENDC)
+        print("\t" + bcolors.BG_ERR_TXT + "ดูเหมือนจะมีปัญหากับการเชื่อมต่ออินเทอร์เน็ต กรุณาลองใหม่อีกครั้งหรือในภายหลัง." + bcolors.ENDC)
         spinner.stop()
         sys.exit(1)
     cmd = 'sha1sum rapidscan.py | grep .... | cut -c 1-40'
@@ -1422,10 +1422,10 @@ elif args_namespace.update:
     newversion_hash = newversion_hash.strip()
     if oldversion_hash == newversion_hash :
         clear()
-        print("\t"+ bcolors.OKBLUE +"You already have the latest version of RapidScan." + bcolors.ENDC)
+        print("\t" + bcolors.OKBLUE + "คุณมีเวอร์ชันล่าสุดของ RapidScan อยู่แล้ว." + bcolors.ENDC)
     else:
         clear()
-        print("\t"+ bcolors.OKGREEN +"RapidScan successfully updated to the latest version." +bcolors.ENDC)
+        print("\t" + bcolors.OKGREEN + "RapidScan อัปเดตสำเร็จไปยังเวอร์ชันล่าสุด." + bcolors.ENDC)
     spinner.stop()
     sys.exit(1)
 
