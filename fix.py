@@ -2,7 +2,7 @@ import subprocess
 import sys
 
 # กำหนดโมดูลที่ต้องการติดตั้งในตัวแปร modules
-modules = ['selenium', 'pyperclip', 'mechanize', 'beautifulsoup4', 'pyinstaller']
+modules = ['selenium', 'pyperclip', 'mechanize', 'beautifulsoup4', 'pyinstaller', 'pytube', 'colorama']
 
 # ฟังก์ชันติดตั้งโมดูล
 def install_package(package):
