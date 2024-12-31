@@ -1,7 +1,6 @@
 from colorama import Fore, Style
 import time
 import os
-import shutil
 from banners import print_logo
 import unicodedata
 
@@ -14,14 +13,6 @@ def clear_console():
 def unicode_length(text):
     """คำนวณความยาวข้อความที่รองรับ Unicode"""
     return sum(2 if unicodedata.east_asian_width(c) in 'WF' else 1 for c in text)
-
-
-def get_terminal_width():
-    """ดึงความกว้างของหน้าจอคอนโซล (terminal)"""
-    try:
-        return shutil.get_terminal_size().columns
-    except AttributeError:
-        return 80  # หากไม่สามารถดึงขนาดหน้าจอได้ ให้ใช้ขนาดเริ่มต้น 80
 
 
 def menu_all():
@@ -55,12 +46,9 @@ def menu_all():
         ("❓ Help", "คำถามที่พบบ่อย"),
     ]
 
-    # คำนวณความกว้างของหน้าจอและตั้งค่าความกว้างของเมนู
-    terminal_width = get_terminal_width()
-    fixed_width = terminal_width // 2  # ปรับให้กว้างพอดีกับหน้าจอ
-
-    # กำหนดจำนวนแถวและคอลัมน์
-    rows_per_column = 7
+    # กำหนดจำนวนแถวและความกว้าง
+    rows_per_column = 10
+    fixed_width = 35  # ปรับความกว้างคงที่ให้เพียงพอ
     columns = -(-len(menu_options) // rows_per_column)
 
     # วนลูปเพื่อแสดงเมนู
@@ -110,3 +98,8 @@ def menu_all():
 # เรียกใช้งานฟังก์ชันเมนู
 if __name__ == "__main__":
     menu_all()
+
+
+
+
+เพิ่มให้มีการคำนวณขนาดหน้าจออัตโนมัติด้วย
