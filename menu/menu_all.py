@@ -24,9 +24,10 @@ def menu_all():
 
     # รายการตัวเลือกในเมนู
     menu_options = [
-        ("📨 SMS", "ส่งข้อความ SMS"),
-        ("📧 Email", "ส่งอีเมล"),
-        ("👥 Facebook", "ส่ง message"),
+        ("📨 SMS", "SPAM 42api"),
+        ("📧 Gmail", "SPAM Gmail"),
+        ("👥 Facebook", "message"),
+        ("👥 Facebook", "comment"),
         ("🎭 Discord", "ส่ง DDOS & FLOAT"),
         ("🌐 Ip", "ส่ง DDOS & FLOAT"),
         ("💥 Gta", "ส่ง DDOS & FLOAT"),
