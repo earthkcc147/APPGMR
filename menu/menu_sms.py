@@ -17,7 +17,7 @@ def show_sms_menu():
         clear_console()
         sms()
         print(Fore.CYAN + "\n📱 --- เมนู SMS --- 📱" + Style.RESET_ALL)
-        print(Fore.GREEN + "1. 📨 SMS" + Fore.YELLOW + "42 API" + Style.RESET_ALL)
+        print(Fore.GREEN + "1. 📨 SMS" + Fore.YELLOW + " (42 API) " + Style.RESET_ALL)
         print(Fore.YELLOW + "00. 🔙 ย้อนกลับ" + Style.RESET_ALL)
 
         try:
