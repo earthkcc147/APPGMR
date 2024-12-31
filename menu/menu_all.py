@@ -2,11 +2,17 @@ from colorama import Fore, Style
 import time
 import os
 from banners import print_logo
+import unicodedata
 
 
 def clear_console():
     # ล้างหน้าจอคอนโซล
     os.system('cls' if os.name == 'nt' else 'clear')
+
+
+def unicode_length(text):
+    """คำนวณความยาวข้อความที่รองรับ Unicode"""
+    return sum(2 if unicodedata.east_asian_width(c) in 'WF' else 1 for c in text)
 
 
 def menu_all():
@@ -40,10 +46,10 @@ def menu_all():
         ("❓ Help", "คำถามที่พบบ่อย"),
     ]
 
-    # กำหนดจำนวนแถวต่อคอลัมน์และระยะห่าง
+    # กำหนดจำนวนแถวและความกว้าง
     rows_per_column = 10
-    fixed_width = 35  # ความกว้างคงที่ของแต่ละคอลัมน์
-    columns = -(-len(menu_options) // rows_per_column)  # คำนวณจำนวนคอลัมน์ทั้งหมด
+    fixed_width = 35  # ปรับความกว้างคงที่ให้เพียงพอ
+    columns = -(-len(menu_options) // rows_per_column)
 
     # วนลูปเพื่อแสดงเมนู
     for row in range(rows_per_column):
@@ -51,8 +57,10 @@ def menu_all():
             index = row + col * rows_per_column
             if index < len(menu_options):
                 option = menu_options[index]
-                print(Fore.GREEN + f"{index + 1:02}. {option[0]}" +
-                      Fore.YELLOW + f" ({option[1]})".ljust(fixed_width), end="")
+                left_text = f"{index + 1:02}. {option[0]}"
+                right_text = f"({option[1]})"
+                padding = fixed_width - unicode_length(left_text)  # คำนวณระยะห่าง
+                print(Fore.GREEN + left_text + Fore.YELLOW + right_text.ljust(padding), end="")
         print()  # จัดให้อยู่ในแถวใหม่
 
     # เพิ่มตัวเลือกพิเศษ
