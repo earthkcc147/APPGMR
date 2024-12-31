@@ -5,7 +5,7 @@ from menu.menu_sms import show_sms_menu
 def main_menu():
     print("\nยินดีต้อนรับเข้าสู่ Main Menu")
     print("1. sms")
-    print("2. รายการที่ 2")
+    print("2. email")
     print("3. ออกจากระบบ")
 
     choice = input("กรุณาเลือกตัวเลือก: ")
@@ -13,7 +13,7 @@ def main_menu():
     if choice == '1':
         show_sms_menu()
     elif choice == '2':
-        print(Fore.CYAN + "คุณเลือก รายการที่ 2")
+        show_email_menu()
     elif choice == '3':
         print(Fore.YELLOW + "ออกจากระบบแล้ว")
         exit()  # ออกจากโปรแกรม
