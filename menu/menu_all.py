@@ -9,7 +9,7 @@ def clear_console():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
-def main_menu():
+def menu_all():
     clear_console()
 
     # แสดงข้อความยินดีต้อนรับ
@@ -84,4 +84,4 @@ def main_menu():
     else:
         print(Fore.RED + "ตัวเลือกไม่ถูกต้อง" + Style.RESET_ALL)
         time.sleep(1)
-        main_menu()
+        menu_all()
