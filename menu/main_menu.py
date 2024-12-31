@@ -24,9 +24,13 @@ def main_menu():
 
     print(Fore.GREEN + "2. 📧 Email" + Fore.YELLOW + " (ส่งอีเมล)" + Style.RESET_ALL)
 
-    print(Fore.GREEN + "3. 🎭 Facebook" + Fore.YELLOW + " (ส่ง message)" + Style.RESET_ALL)
+    print(Fore.GREEN + "3. 👥 Facebook" + Fore.YELLOW + " (ส่ง message)" + Style.RESET_ALL)
+
+    print(Fore.GREEN + "4. 🎭 Discord" + Fore.YELLOW + " (ส่ง DDOS & FLOAT)" + Style.RESET_ALL)
     
-    print(Fore.GREEN + "4. 🌐 ip" + Fore.YELLOW + " (ส่ง DDOS & FLOAT)" + Style.RESET_ALL)
+    print(Fore.GREEN + "5. 🌐 Ip" + Fore.YELLOW + " (ส่ง DDOS & FLOAT)" + Style.RESET_ALL)
+
+    print(Fore.GREEN + "6. 💥 Gta" + Fore.YELLOW + " (ส่ง DDOS & FLOAT)" + Style.RESET_ALL)
 
     print(Fore.RED + "00. ❌ ออกจากระบบ" + Style.RESET_ALL)
 
@@ -44,7 +48,7 @@ def main_menu():
     elif choice == '3':
         from menu import show_facebook_menu
         show_facebook_menu()
-    elif choice == '4':
+    elif choice == '5':
         from menu import show_ip_menu
         show_ip_menu()
 
