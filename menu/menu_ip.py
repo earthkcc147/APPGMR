@@ -1,6 +1,8 @@
 import subprocess
 import requests
 import os
+from banners import IP
+from colorama import Fore, Back, Style
 
 def clear_console():
     # ตรวจสอบว่ากำลังทำงานในระบบปฏิบัติการใด
@@ -9,25 +11,34 @@ def clear_console():
     else:  # Linux หรือ macOS หรือ Termux
         os.system('clear')
 
-
 # เมนู SMS
-def show_sms_menu():
+def show_facebook_menu():
     while True:
         clear_console()
-        print("\n📱 --- เมนู SMS --- 📱\n")
-        print("1. sms 42 api")
-        print("00. ย้อนกลับ")
+        facebook()
+        print(Fore.CYAN + "\n📱 --- เมนู Spam Facebook --- 📱" + Style.RESET_ALL)
+        print(Fore.GREEN + "1. 📨 message" + Fore.YELLOW + " (ข้อความ) " + Style.RESET_ALL)
+        print(Fore.GREEN + "2. 💭 comment" + Fore.YELLOW + " (คอมเม้นท์) " + Style.RESET_ALL)
+        print(Fore.YELLOW + "00. 🔙 ย้อนกลับ" + Style.RESET_ALL)
 
         try:
-            sms_choice = int(input("\n🔔 กรุณาเลือกตัวเลือก: "))
+            sms_choice = int(input(Fore.BLUE + "\n🔔 กรุณาเลือกตัวเลือก: " + Style.RESET_ALL))
 
             if sms_choice == 00:
-                print("🔙 กลับสู่เมนูหลัก...")
+                print(Fore.YELLOW + "🔙 กลับสู่เมนูหลัก..." + Style.RESET_ALL)
+                from menu import main_menu  # นำเข้า main_menu
+
+                main_menu()  # กลับไปยัง main_menu
                 break
             elif sms_choice == 1: 
-                print("กำลังรันไฟล์ sms.py...")
-                subprocess.run(["python3", "function/sms/sms1.py"])
+                print(Fore.GREEN + "กำลังรันไฟล์..." + Style.RESET_ALL)
+                subprocess.run(["python3", "function/facebook/message.py"])
+            elif sms_choice == 2: 
+                print(Fore.GREEN + "กำลังรันไฟล์..." + Style.RESET_ALL)
+                subprocess.run(["python3", "function/facebook/message2.py"])
+
+
             else:
-                print("❌ ตัวเลือกไม่ถูกต้อง กรุณาลองอีกครั้ง!")
+                print(Fore.RED + "❌ ตัวเลือกไม่ถูกต้อง กรุณาลองอีกครั้ง!" + Style.RESET_ALL)
         except ValueError:
-            print("❌ กรุณากรอกตัวเลขเท่านั้น!")
+            print(Fore.RED + "❌ กรุณากรอกตัวเลขเท่านั้น!" + Style.RESET_ALL)
