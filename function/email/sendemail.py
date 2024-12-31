@@ -3,6 +3,19 @@ import time
 import json
 import os
 
+
+
+
+def clear_console():
+    # ตรวจสอบว่ากำลังทำงานในระบบปฏิบัติการใด
+    if os.name == 'nt':  # Windows
+        os.system('cls')
+    else:  # Linux หรือ macOS หรือ Termux
+        os.system('clear')
+
+
+clear_console()
+
 # แสดงข้อความ
 print("\033[1;31m_________    __        __        ____        ________    __                                             \033[1;m")
 print("\033[1;34m|########|  |##\      /##|      /####\      |########|  |##|              โดย @everydaycodings                  \033[1;m")
