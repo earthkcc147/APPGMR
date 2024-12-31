@@ -175,7 +175,7 @@ def logo():
     print(bcolors.ENDC)
 
 
-# Initiliazing the idle loader/spinner class
+# การเริ่มต้นคลาสตัวโหลด/ตัวหมุน
 class Spinner:
     busy = False
     delay = 0.005 # 0.05
@@ -210,7 +210,7 @@ class Spinner:
                     sys.stdout.flush()
 
         except (KeyboardInterrupt, SystemExit):
-            print("\n\t"+ bcolors.BG_ERR_TXT+"RapidScan received a series of Ctrl+C hits. Quitting..." +bcolors.ENDC)
+            print("\n\t"+ bcolors.BG_ERR_TXT+"RapidScan ได้รับการกด Ctrl+C หลายครั้งติดต่อกัน กำลังออก..." +bcolors.ENDC)
             sys.exit(1)
 
     def start(self):
@@ -219,18 +219,18 @@ class Spinner:
             threading.Thread(target=self.spinner_task).start()
         except Exception as e:
             print("\n")
-        
+
     def stop(self):
         try:
             self.busy = False
             time.sleep(self.delay)
         except (KeyboardInterrupt, SystemExit):
-            print("\n\t"+ bcolors.BG_ERR_TXT+"RapidScan received a series of Ctrl+C hits. Quitting..." +bcolors.ENDC)
+            print("\n\t"+ bcolors.BG_ERR_TXT+"RapidScan ได้รับการกด Ctrl+C หลายครั้งติดต่อกัน กำลังออก..." +bcolors.ENDC)
             sys.exit(1)
 
-# End ofloader/spinner class
+# สิ้นสุดคลาสตัวโหลด/ตัวหมุน
 
-# Instantiating the spinner/loader class
+# การสร้างอ็อบเจ็กต์ของคลาสตัวโหลด/ตัวหมุน
 spinner = Spinner()
 
 
