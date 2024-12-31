@@ -48,6 +48,9 @@ def main_menu():
     elif choice == '3':
         from menu import show_facebook_menu
         show_facebook_menu()
+    elif choice == '4':
+        from menu import show_discord_menu
+        show_discord_menu()
     elif choice == '5':
         from menu import show_ip_menu
         show_ip_menu()
