@@ -1,7 +1,7 @@
 import subprocess
 import requests
 import os
-from banners import sms
+from banners import email
 
 def clear_console():
     # ตรวจสอบว่ากำลังทำงานในระบบปฏิบัติการใด
