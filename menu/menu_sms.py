@@ -2,7 +2,7 @@ import subprocess
 import requests
 import os
 from banners.banners import sms
-from menu.main_menu import main_menu  # นำเข้า main_menu
+from menu import main_menu  # นำเข้า main_menu
 
 def clear_console():
     # ตรวจสอบว่ากำลังทำงานในระบบปฏิบัติการใด
