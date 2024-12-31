@@ -16,8 +16,8 @@ def show_facebook_menu():
     while True:
         clear_console()
         facebook()
-        print(Fore.CYAN + "\n📱 --- เมนู MAILS --- 📱" + Style.RESET_ALL)
-        print(Fore.GREEN + "1. 📨 Gmail" + Fore.YELLOW + " (Gmail) " + Style.RESET_ALL)
+        print(Fore.CYAN + "\n📱 --- เมนู Spam Facebook --- 📱" + Style.RESET_ALL)
+        print(Fore.GREEN + "1. 📨 fb" + Fore.YELLOW + " (Gmail) " + Style.RESET_ALL)
         print(Fore.YELLOW + "00. 🔙 ย้อนกลับ" + Style.RESET_ALL)
 
         try:
@@ -31,7 +31,7 @@ def show_facebook_menu():
                 break
             elif sms_choice == 1: 
                 print(Fore.GREEN + "กำลังรันไฟล์ sms.py..." + Style.RESET_ALL)
-                subprocess.run(["python3", "function/email/sendemail.py"])
+                subprocess.run(["python3", "function/facebook/message.py"])
             else:
                 print(Fore.RED + "❌ ตัวเลือกไม่ถูกต้อง กรุณาลองอีกครั้ง!" + Style.RESET_ALL)
         except ValueError:
