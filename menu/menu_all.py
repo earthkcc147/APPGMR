@@ -42,7 +42,7 @@ def menu_all():
 
     # กำหนดจำนวนแถวต่อคอลัมน์และระยะห่าง
     rows_per_column = 7
-    column_spacing = 35  # ระยะห่างระหว่างคอลัมน์
+    column_spacing = 15  # ระยะห่างระหว่างคอลัมน์
     columns = -(-len(menu_options) // rows_per_column)  # คำนวณจำนวนคอลัมน์ทั้งหมด
 
     # วนลูปเพื่อแสดงเมนู
