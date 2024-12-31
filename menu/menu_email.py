@@ -11,7 +11,7 @@ def clear_console():
         os.system('clear')
 
 # เมนู SMS
-def show_sms_menu():
+def show_email_menu():
     while True:
         clear_console()
         email()
