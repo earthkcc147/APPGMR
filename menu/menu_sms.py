@@ -24,7 +24,7 @@ def show_sms_menu():
 
             if sms_choice == 00:
                 print("🔙 กลับสู่เมนูหลัก...")
-                from menu.main_menu import main_menu  # นำเข้า main_menu
+                from menu import main_menu  # นำเข้า main_menu
 
                 main_menu()  # กลับไปยัง main_menu
                 break
