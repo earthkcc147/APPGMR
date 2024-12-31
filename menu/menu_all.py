@@ -23,37 +23,16 @@ def menu_all():
     print_logo()
     print(Fore.CYAN + Style.BRIGHT + "\nยินดีต้อนรับเข้าสู่ Main Menu\n" + Style.RESET_ALL)
 
-    # รายการตัวเลือกในเมนู แบ่งเป็นกลุ่ม
+    # รายการตัวเลือกในเมนู
     menu_options = [
-        # กลุ่ม SMS
         ("📨 SMS", "SPAM 42api"),
         ("📧 Gmail", "SPAM Gmail"),
-        
-        # คั่นกลุ่ม
-        ("---", "-----"),
-        
-        # กลุ่ม Facebook
         ("👥 Facebook", "Message"),
         ("👥 Facebook", "Comment"),
-        
-        # คั่นกลุ่ม
-        ("---", "-----"),
-        
-        # กลุ่ม Discord
         ("🎭 Discord", "Copy Discord"),
         ("🎭 Discord", "Hack Discord"),
-        
-        # คั่นกลุ่ม
-        ("---", "-----"),
-        
-        # กลุ่ม IP
         ("🌐 Ip", "ส่ง DDOS & FLOAT1"),
         ("🌐 Ip", "ส่ง DDOS & FLOAT2"),
-        
-        # คั่นกลุ่ม
-        ("---", "-----"),
-        
-        # กลุ่มอื่นๆ
         ("💥 Gta", "ส่ง DDOS & FLOAT"),
         ("🛠 Tools", "เครื่องมือช่วยเหลือ"),
         ("💻 System", "ข้อมูลระบบ"),
@@ -61,24 +40,21 @@ def menu_all():
         ("❓ Help", "คำถามที่พบบ่อย"),
     ]
 
-    # คำนวณจำนวนแถวและคอลัมน์ให้เหมาะสม
-    max_columns = 3  # กำหนดจำนวนคอลัมน์สูงสุด
-    num_rows = (len(menu_options) + max_columns - 1) // max_columns  # คำนวณจำนวนแถว
+    # กำหนดจำนวนแถวและความกว้าง
+    rows_per_column = 10
+    fixed_width = 35  # ปรับความกว้างคงที่ให้เพียงพอ
+    columns = -(-len(menu_options) // rows_per_column)
 
     # วนลูปเพื่อแสดงเมนู
-    for row in range(num_rows):
-        for col in range(max_columns):
-            index = row + col * num_rows
+    for row in range(rows_per_column):
+        for col in range(columns):
+            index = row + col * rows_per_column
             if index < len(menu_options):
                 option = menu_options[index]
                 left_text = f"{index + 1:02}. {option[0]}"
                 right_text = f"({option[1]})"
-                padding = 35 - unicode_length(left_text)  # คำนวณระยะห่าง
-                # ตรวจสอบว่าเป็นตัวคั่น (---)
-                if option[0] == "---":
-                    print(Fore.YELLOW + "-"*35 + Style.RESET_ALL)
-                else:
-                    print(Fore.GREEN + left_text + Fore.YELLOW + right_text.ljust(padding), end="")
+                padding = fixed_width - unicode_length(left_text)  # คำนวณระยะห่าง
+                print(Fore.GREEN + left_text + Fore.YELLOW + right_text.ljust(padding), end="")
         print()  # จัดให้อยู่ในแถวใหม่
 
     # เพิ่มตัวเลือกพิเศษ
@@ -116,3 +92,5 @@ def menu_all():
 # เรียกใช้งานฟังก์ชันเมนู
 if __name__ == "__main__":
     menu_all()
+
+
