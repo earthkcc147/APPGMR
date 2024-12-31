@@ -2,7 +2,6 @@ import subprocess
 import requests
 import os
 from banners.banners import sms
-from menu.main_menu import main_menu  # นำเข้า main_menu
 
 def clear_console():
     # ตรวจสอบว่ากำลังทำงานในระบบปฏิบัติการใด
@@ -25,6 +24,8 @@ def show_sms_menu():
 
             if sms_choice == 00:
                 print("🔙 กลับสู่เมนูหลัก...")
+                from menu.main_menu import main_menu  # นำเข้า main_menu
+
                 main_menu()  # กลับไปยัง main_menu
                 break
             elif sms_choice == 1: 
