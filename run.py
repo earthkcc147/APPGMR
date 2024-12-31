@@ -1,6 +1,6 @@
 import os
 from colorama import init, Fore, Style
-from banners.welcome import print_intro, print_logo
+from banners import print_intro, print_logo
 from function.login import login  # นำเข้าฟังก์ชัน login จากไฟล์ login.py
 from menu.main_menu import main_menu  # นำเข้าฟังก์ชัน main_menu จากไฟล์ main_menu.py
 
