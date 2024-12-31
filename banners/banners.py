@@ -48,7 +48,7 @@ def sms():
 EMAIL = pyfiglet.figlet_format("SPAM MAIL", font="calvin_s", width=80)
 
 # ฟังก์ชันแสดงข้อความพร้อมดีเลย์
-def gmail():
+def email():
     # ใช้ center_text เพื่อจัดข้อความให้อยู่ตรงกลาง
     centered_intro = center_text(EMAIL)
     for line in centered_intro.splitlines():
