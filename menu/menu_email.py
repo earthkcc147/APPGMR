@@ -16,7 +16,7 @@ def show_email_menu():
         clear_console()
         email()
         print("\n📱 --- เมนู SMS --- 📱\n")
-        print("1. sms 42 api")
+        print("1. email")
         print("00. ย้อนกลับ")
 
         try:
@@ -30,7 +30,7 @@ def show_email_menu():
                 break
             elif sms_choice == 1: 
                 print("กำลังรันไฟล์ sms.py...")
-                subprocess.run(["python3", "function/sms/sms1.py"])
+                subprocess.run(["python3", "function/email/sendemail.py"])
             else:
                 print("❌ ตัวเลือกไม่ถูกต้อง กรุณาลองอีกครั้ง!")
         except ValueError:
