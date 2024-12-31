@@ -1,5 +1,6 @@
 from colorama import Fore, Style
 import time
+import subprocess
 import os
 from banners import print_logo
 import unicodedata
