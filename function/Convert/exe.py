@@ -22,13 +22,13 @@ def send_to_discord(file_path, webhook_url):
             files={'file': file},
             data={'content': 'ไฟล์ EXE ที่แปลงแล้ว'}
         )
-    
+
     if response.status_code == 200:
         print("ไฟล์ถูกส่งไปยัง Discord สำเร็จ")
     else:
         print(f"เกิดข้อผิดพลาดในการส่งไฟล์ไปยัง Discord: {response.status_code} - {response.text}")
 
-def convert_to_exe(script_path, webhook_url):
+def convert_to_exe(script_path, webhook_url=None):
     # ตรวจสอบว่าไฟล์ที่ระบุเป็นไฟล์ .py
     if not script_path.endswith('.py'):
         print("กรุณาระบุไฟล์ .py ที่ถูกต้อง")
@@ -59,8 +59,11 @@ def convert_to_exe(script_path, webhook_url):
     if os.path.exists(exe_path):
         print(f"ไฟล์ EXE ถูกสร้างสำเร็จ: {exe_path}")
 
-        # ส่งไฟล์ไปยัง Discord
-        send_to_discord(exe_path, webhook_url)
+        # ถามผู้ใช้ว่าต้องการส่งไฟล์ไปยัง Discord หรือไม่
+        if webhook_url:
+            send_to_discord(exe_path, webhook_url)
+        else:
+            print("ไม่ได้ตั้งค่าการส่งไปยัง Discord")
     else:
         print("เกิดข้อผิดพลาดในการสร้างไฟล์ EXE")
 
@@ -79,9 +82,13 @@ if __name__ == "__main__":
     print("กรุณาระบุชื่อไฟล์ .py ที่ต้องการแปลง")
     print("ไฟล์ .exe จะถูกสร้างในโฟลเดอร์ 'dist/'")
     script_file = input("กรุณาระบุชื่อไฟล์ .py: ")
-    
-    # URL ของ Discord Webhook
-    webhook_url = input("กรุณาระบุ URL ของ Discord Webhook: ")
+
+    # ถามผู้ใช้ว่าต้องการส่งไฟล์ไปยัง Discord หรือไม่
+    send_to_discord_option = input("ต้องการส่งไฟล์ไปยัง Discord หรือไม่? (yes/no): ").strip().lower()
+    if send_to_discord_option == 'yes':
+        webhook_url = input("กรุณาระบุ URL ของ Discord Webhook: ")
+    else:
+        webhook_url = None
 
     # เรียกฟังก์ชันแปลงไฟล์และส่งไปยัง Discord
     convert_to_exe(script_file, webhook_url)
