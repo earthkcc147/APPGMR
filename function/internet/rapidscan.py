@@ -1433,11 +1433,11 @@ elif args_namespace.target:
 
     target = url_maker(args_namespace.target)
     #target = args_namespace.target
-    os.system('rm /tmp/rapidscan* > /dev/null 2>&1') # Clearing previous scan files
+    os.system('rm /tmp/rapidscan* > /dev/null 2>&1') # ลบไฟล์สแกนก่อนหน้า
     os.system('clear')
     os.system('setterm -cursor off')
     logo()
-    print(bcolors.BG_HEAD_TXT+"[ Checking Available Security Scanning Tools Phase... Initiated. ]"+bcolors.ENDC)
+    print(bcolors.BG_HEAD_TXT+"[ ตรวจสอบเครื่องมือสแกนความปลอดภัยที่มีอยู่... เริ่มแล้ว. ]"+bcolors.ENDC)
 
     unavail_tools_names = list()
 
@@ -1448,38 +1448,37 @@ elif args_namespace.target:
             output, err = p.communicate()
             val = output + err
         except:
-            print("\t"+bcolors.BG_ERR_TXT+"RapidScan was terminated abruptly..."+bcolors.ENDC)
+            print("\t"+bcolors.BG_ERR_TXT+"RapidScan ถูกยกเลิกอย่างกะทันหัน..."+bcolors.ENDC)
             sys.exit(1)
-        
-        # If the tool is not found or it's part of the --skip argument(s), disabling it
+
+        # ถ้าเครื่องมือไม่พบหรือต้องการข้ามตาม --skip, จะปิดการใช้งานเครื่องมือ
         if b"not found" in val or tools_precheck[rs_avail_tools][arg1] in args_namespace.skip :
             if b"not found" in val:
-                print("\t"+bcolors.OKBLUE+tools_precheck[rs_avail_tools][arg1]+bcolors.ENDC+bcolors.BADFAIL+"...unavailable."+bcolors.ENDC)
+                print("\t"+bcolors.OKBLUE+tools_precheck[rs_avail_tools][arg1]+bcolors.ENDC+bcolors.BADFAIL+"...ไม่สามารถใช้งานได้."+bcolors.ENDC)
             elif tools_precheck[rs_avail_tools][arg1] in args_namespace.skip :
-                print("\t"+bcolors.OKBLUE+tools_precheck[rs_avail_tools][arg1]+bcolors.ENDC+bcolors.BADFAIL+"...skipped."+bcolors.ENDC)
-            
+                print("\t"+bcolors.OKBLUE+tools_precheck[rs_avail_tools][arg1]+bcolors.ENDC+bcolors.BADFAIL+"...ข้ามแล้ว."+bcolors.ENDC)
+
             for scanner_index, scanner_val in enumerate(tool_names):
                 if scanner_val[2] == tools_precheck[rs_avail_tools][arg1]:
-                    scanner_val[3] = 0 # disabling scanner as it's not available.
+                    scanner_val[3] = 0 # ปิดการใช้งานเครื่องมือเนื่องจากไม่พร้อมใช้งาน
                     unavail_tools_names.append(tools_precheck[rs_avail_tools][arg1])
 
         else:
-            print("\t"+bcolors.OKBLUE+tools_precheck[rs_avail_tools][arg1]+bcolors.ENDC+bcolors.OKGREEN+"...available."+bcolors.ENDC)
+            print("\t"+bcolors.OKBLUE+tools_precheck[rs_avail_tools][arg1]+bcolors.ENDC+bcolors.OKGREEN+"...พร้อมใช้งาน."+bcolors.ENDC)
         rs_avail_tools = rs_avail_tools + 1
         clear()
     unavail_tools_names = list(set(unavail_tools_names))
     if len(unavail_tools_names) == 0:
-        print("\t"+bcolors.OKGREEN+"All Scanning Tools are available. Complete vulnerability checks will be performed by RapidScan."+bcolors.ENDC)
+        print("\t"+bcolors.OKGREEN+"เครื่องมือสแกนทั้งหมดพร้อมใช้งานแล้ว การตรวจสอบช่องโหว่ทั้งหมดจะทำโดย RapidScan."+bcolors.ENDC)
     else:
-        print("\t"+bcolors.WARNING+"Some of these tools "+bcolors.BADFAIL+str(unavail_tools_names)+bcolors.ENDC+bcolors.WARNING+" are unavailable or will be skipped. RapidScan will still perform the rest of the tests. Install these tools to fully utilize the functionality of RapidScan."+bcolors.ENDC)
-    print(bcolors.BG_ENDL_TXT+"[ Checking Available Security Scanning Tools Phase... Completed. ]"+bcolors.ENDC)
+        print("\t"+bcolors.WARNING+"เครื่องมือบางตัว "+bcolors.BADFAIL+str(unavail_tools_names)+bcolors.ENDC+bcolors.WARNING+" ไม่พร้อมใช้งานหรือจะถูกข้ามไป การตรวจสอบที่เหลือจะยังคงดำเนินการ RapidScan จะทำการทดสอบที่เหลือไป สร้างเครื่องมือเหล่านี้เพื่อใช้งานฟังก์ชันของ RapidScan ให้เต็มที่."+bcolors.ENDC)
+    print(bcolors.BG_ENDL_TXT+"[ ตรวจสอบเครื่องมือสแกนความปลอดภัยที่มีอยู่... เสร็จสิ้น. ]"+bcolors.ENDC)
     print("\n")
-    print(bcolors.BG_HEAD_TXT+"[ Preliminary Scan Phase Initiated... Loaded "+str(tool_checks)+" vulnerability checks. ]"+bcolors.ENDC)
-    #while (tool < 1):
+    print(bcolors.BG_HEAD_TXT+"[ เริ่มการสแกนเบื้องต้น... โหลดการตรวจสอบช่องโหว่ "+str(tool_checks)+" รายการ. ]"+bcolors.ENDC)
     while(tool < len(tool_names)):
-        print("["+tool_status[tool][arg3]+tool_status[tool][arg4]+"] Deploying "+str(tool+1)+"/"+str(tool_checks)+" | "+bcolors.OKBLUE+tool_names[tool][arg2]+bcolors.ENDC,)
+        print("["+tool_status[tool][arg3]+tool_status[tool][arg4]+"] กำลังเปิดใช้งาน "+str(tool+1)+"/"+str(tool_checks)+" | "+bcolors.OKBLUE+tool_names[tool][arg2]+bcolors.ENDC,)
         if tool_names[tool][arg4] == 0:
-            print(bcolors.WARNING+"\nScanning Tool Unavailable. Skipping Test...\n"+bcolors.ENDC)
+            print(bcolors.WARNING+"\nเครื่องมือสแกนไม่พร้อมใช้งาน ข้ามการทดสอบ...\n"+bcolors.ENDC)
             rs_skipped_checks = rs_skipped_checks + 1
             tool = tool + 1
             continue
@@ -1503,22 +1502,18 @@ elif args_namespace.target:
                 scan_stop = time.time()
                 elapsed = scan_stop - scan_start
                 rs_total_elapsed = rs_total_elapsed + elapsed
-                #print(bcolors.OKBLUE+"\b...Completed in "+display_time(int(elapsed))+bcolors.ENDC+"\n")
                 sys.stdout.write(ERASE_LINE)
-                print(bcolors.OKBLUE+"\nScan Completed in "+display_time(int(elapsed))+bcolors.ENDC, end='\r', flush=True)
+                print(bcolors.OKBLUE+"\nการสแกนเสร็จสิ้นในเวลา "+display_time(int(elapsed))+bcolors.ENDC, end='\r', flush=True)
                 print("\n")
-                #clear()
                 rs_tool_output_file = open(temp_file).read()
                 if tool_status[tool][arg2] == 0:
                     if tool_status[tool][arg1].lower() in rs_tool_output_file.lower():
-                        #print "\t"+ vul_info(tool_resp[tool][arg2]) + bcolors.BADFAIL +" "+ tool_resp[tool][arg1] + bcolors.ENDC
                         vul_remed_info(tool,tool_resp[tool][arg2],tool_resp[tool][arg3])
                         rs_vul_list.append(tool_names[tool][arg1]+"*"+tool_names[tool][arg2])
                 else:
                     if any(i in rs_tool_output_file for i in tool_status[tool][arg6]):
-                        m = 1 # This does nothing.
+                        m = 1 # ไม่ทำอะไร
                     else:
-                        #print "\t"+ vul_info(tool_resp[tool][arg2]) + bcolors.BADFAIL +" "+ tool_resp[tool][arg1] + bcolors.ENDC
                         vul_remed_info(tool,tool_resp[tool][arg2],tool_resp[tool][arg3])
                         rs_vul_list.append(tool_names[tool][arg1]+"*"+tool_names[tool][arg2])
         else:
@@ -1527,25 +1522,23 @@ elif args_namespace.target:
                 scan_stop = time.time()
                 elapsed = scan_stop - scan_start
                 rs_total_elapsed = rs_total_elapsed + elapsed
-                #sys.stdout.write(CURSOR_UP_ONE) 
                 sys.stdout.write(ERASE_LINE)
-                #print("-" * terminal_size(), end='\r', flush=True)
-                print(bcolors.OKBLUE+"\nScan Interrupted in "+display_time(int(elapsed))+bcolors.ENDC, end='\r', flush=True)
-                print("\n"+bcolors.WARNING + "\tTest Skipped. Performing Next. Press Ctrl+Z to Quit RapidScan.\n" + bcolors.ENDC)
+                print(bcolors.OKBLUE+"\nการสแกนถูกยกเลิกในเวลา "+display_time(int(elapsed))+bcolors.ENDC, end='\r', flush=True)
+                print("\n"+bcolors.WARNING + "\tการทดสอบถูกข้าม ทำการทดสอบถัดไป กด Ctrl+Z เพื่อหยุด RapidScan.\n" + bcolors.ENDC)
                 rs_skipped_checks = rs_skipped_checks + 1
 
         tool=tool+1
 
-    print(bcolors.BG_ENDL_TXT+"[ Preliminary Scan Phase Completed. ]"+bcolors.ENDC)
+    print(bcolors.BG_ENDL_TXT+"[ การสแกนเบื้องต้นเสร็จสิ้น. ]"+bcolors.ENDC)
     print("\n")
 
-    #################### Report & Documentation Phase ###########################
+    #################### การสร้างรายงาน & เอกสาร ###########################
     date = subprocess.Popen(["date", "+%Y-%m-%d"],stdout=subprocess.PIPE).stdout.read()[:-1].decode("utf-8")
     debuglog = "rs.dbg.%s.%s" % (target, date) 
     vulreport = "rs.vul.%s.%s" % (target, date)
-    print(bcolors.BG_HEAD_TXT+"[ Report Generation Phase Initiated. ]"+bcolors.ENDC)
+    print(bcolors.BG_HEAD_TXT+"[ การสร้างรายงานเริ่มต้น. ]"+bcolors.ENDC)
     if len(rs_vul_list)==0:
-        print("\t"+bcolors.OKGREEN+"No Vulnerabilities Detected."+bcolors.ENDC)
+        print("\t"+bcolors.OKGREEN+"ไม่พบช่องโหว่."+bcolors.ENDC)
     else:
         with open(vulreport, "a") as report:
             while(rs_vul < len(rs_vul_list)):
