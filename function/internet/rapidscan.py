@@ -97,19 +97,19 @@ class bcolors:
     BG_SCAN_TXT_END   = '\x1b[0m'
 
 
-# Classifies the Vulnerability's Severity
+# จัดประเภทความรุนแรงของช่องโหว่
 def vul_info(val):
-    result =''
+    result = ''
     if val == 'c':
-        result = bcolors.BG_CRIT_TXT+" critical "+bcolors.ENDC
+        result = bcolors.BG_CRIT_TXT+" ร้ายแรง "+bcolors.ENDC
     elif val == 'h':
-        result = bcolors.BG_HIGH_TXT+" high "+bcolors.ENDC
+        result = bcolors.BG_HIGH_TXT+" สูง "+bcolors.ENDC
     elif val == 'm':
-        result = bcolors.BG_MED_TXT+" medium "+bcolors.ENDC
+        result = bcolors.BG_MED_TXT+" กลาง "+bcolors.ENDC
     elif val == 'l':
-        result = bcolors.BG_LOW_TXT+" low "+bcolors.ENDC
+        result = bcolors.BG_LOW_TXT+" ต่ำ "+bcolors.ENDC
     else:
-        result = bcolors.BG_INFO_TXT+" info "+bcolors.ENDC
+        result = bcolors.BG_INFO_TXT+" ข้อมูล "+bcolors.ENDC
     return result
 
 # Legends
@@ -117,13 +117,13 @@ proc_high = bcolors.BADFAIL + "●" + bcolors.ENDC
 proc_med  = bcolors.WARNING + "●" + bcolors.ENDC
 proc_low  = bcolors.OKGREEN + "●" + bcolors.ENDC
 
-# Links the vulnerability with threat level and remediation database
-def vul_remed_info(v1,v2,v3):
-    print(bcolors.BOLD+"Vulnerability Threat Level"+bcolors.ENDC)
+# ลิงก์ช่องโหว่กับระดับความเสี่ยงและฐานข้อมูลการแก้ไข
+def vul_remed_info(v1, v2, v3):
+    print(bcolors.BOLD+"ระดับความเสี่ยงของช่องโหว่"+bcolors.ENDC)
     print("\t"+vul_info(v2)+" "+bcolors.WARNING+str(tool_resp[v1][0])+bcolors.ENDC)
-    print(bcolors.BOLD+"Vulnerability Definition"+bcolors.ENDC)
+    print(bcolors.BOLD+"คำจำกัดความของช่องโหว่"+bcolors.ENDC)
     print("\t"+bcolors.BADFAIL+str(tools_fix[v3-1][1])+bcolors.ENDC)
-    print(bcolors.BOLD+"Vulnerability Remediation"+bcolors.ENDC)
+    print(bcolors.BOLD+"การแก้ไขช่องโหว่"+bcolors.ENDC)
     print("\t"+bcolors.OKGREEN+str(tools_fix[v3-1][2])+bcolors.ENDC)
 
 
@@ -159,7 +159,7 @@ def clear():
         sys.stdout.write("\033[F")
         sys.stdout.write("\033[K") #clears until EOL
 
-# RapidScan Logo
+# โลโก้ของ RapidScan
 def logo():
     print(bcolors.WARNING)
     logo_ascii = """
@@ -167,9 +167,9 @@ def logo():
                                  /__)_  """+bcolors.BADFAIL+" ●"+bcolors.WARNING+"""_/(  _ _
                                 / ( (//)/(/__)( (//)
                                      /
-                     """+bcolors.ENDC+"""(The Multi-Tool Web Vulnerability Scanner)
+                     """+bcolors.ENDC+"""(เครื่องมือหลายตัวในการสแกนช่องโหว่เว็บ)
 
-                     Check out our new software, """+bcolors.BG_LOW_TXT+"""NetBot"""+bcolors.ENDC+""" for simulating DDoS attacks - https://github.com/skavngr/netbot
+                     ลองดูซอฟต์แวร์ใหม่ของเรา, """+bcolors.BG_LOW_TXT+"""NetBot"""+bcolors.ENDC+""" สำหรับการจำลองการโจมตี DDoS - https://github.com/skavngr/netbot
     """
     print(logo_ascii)
     print(bcolors.ENDC)
