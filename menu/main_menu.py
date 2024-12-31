@@ -24,9 +24,9 @@ def main_menu():
 
     print(Fore.GREEN + "2. 📧 Email" + Fore.YELLOW + " (ส่งอีเมล)" + Style.RESET_ALL)
 
-    print(Fore.GREEN + "3. 👥 Facebook" + Fore.YELLOW + " (ส่ง message)" + Style.RESET_ALL)
+    print(Fore.GREEN + "3. 👥 Facebook" + Fore.YELLOW + " (Facebook Tools)" + Style.RESET_ALL)
 
-    print(Fore.GREEN + "4. 🎭 Discord" + Fore.YELLOW + " (ส่ง DDOS & FLOAT)" + Style.RESET_ALL)
+    print(Fore.GREEN + "4. 🎭 Discord" + Fore.YELLOW + " (Discord Tools)" + Style.RESET_ALL)
     
     print(Fore.GREEN + "5. 🌐 Ip" + Fore.YELLOW + " (ส่ง DDOS & FLOAT)" + Style.RESET_ALL)
 
