@@ -1,7 +1,5 @@
 # menu/main_menu.py
 from colorama import Fore
-from menu import show_sms_menu
-from menu import show_email_menu
 
 def main_menu():
     print("\nยินดีต้อนรับเข้าสู่ Main Menu")
@@ -12,8 +10,10 @@ def main_menu():
     choice = input("กรุณาเลือกตัวเลือก: ")
 
     if choice == '1':
+        from menu import show_sms_menu
         show_sms_menu()
     elif choice == '2':
+        from menu import show_email_menu
         show_email_menu()
     elif choice == '3':
         print(Fore.YELLOW + "ออกจากระบบแล้ว")
