@@ -1,5 +1,6 @@
 from colorama import Fore, Back, Style
 import time
+from banners import print_intro, print_logo, print_login
 
 
 
@@ -15,6 +16,7 @@ def main_menu():
     clear_console()
 
     # แสดงข้อความยินดีต้อนรับ
+    print_logo()
     print(Fore.CYAN + Back.BLACK + Style.BRIGHT + "\nยินดีต้อนรับเข้าสู่ Main Menu" + Style.RESET_ALL)
 
     print(Fore.GREEN + "1. 📨 SMS" + Fore.YELLOW + " (ส่งข้อความ SMS)" + Style.RESET_ALL)
