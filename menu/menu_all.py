@@ -42,7 +42,7 @@ def menu_all():
 
     # กำหนดจำนวนแถวต่อคอลัมน์และระยะห่าง
     rows_per_column = 10
-    column_spacing = 5  # ระยะห่างระหว่างคอลัมน์
+    fixed_width = 35  # ความกว้างคงที่ของแต่ละคอลัมน์
     columns = -(-len(menu_options) // rows_per_column)  # คำนวณจำนวนคอลัมน์ทั้งหมด
 
     # วนลูปเพื่อแสดงเมนู
@@ -52,7 +52,7 @@ def menu_all():
             if index < len(menu_options):
                 option = menu_options[index]
                 print(Fore.GREEN + f"{index + 1:02}. {option[0]}" +
-                      Fore.YELLOW + f" ({option[1]})", end="".ljust(column_spacing))
+                      Fore.YELLOW + f" ({option[1]})".ljust(fixed_width), end="")
         print()  # จัดให้อยู่ในแถวใหม่
 
     # เพิ่มตัวเลือกพิเศษ
@@ -85,3 +85,8 @@ def menu_all():
         print(Fore.RED + "ตัวเลือกไม่ถูกต้อง" + Style.RESET_ALL)
         time.sleep(1)
         menu_all()
+
+
+# เรียกใช้งานฟังก์ชันเมนู
+if __name__ == "__main__":
+    menu_all()
