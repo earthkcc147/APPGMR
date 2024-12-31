@@ -1,5 +1,23 @@
 import time
 import pyperclip
+import subprocess
+import sys
+
+# ตรวจสอบว่าโมดูล selenium และ pyperclip ถูกติดตั้งหรือยัง
+def install_package(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+# ตรวจสอบและติดตั้ง selenium และ pyperclip ถ้ายังไม่มี
+try:
+    import selenium
+except ImportError:
+    install_package('selenium')
+
+try:
+    import pyperclip
+except ImportError:
+    install_package('pyperclip')
+
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.keys import Keys
