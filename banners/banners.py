@@ -7,6 +7,8 @@ from colorama import init, Fore, Style
 # เริ่มต้นการใช้งาน colorama
 init()
 
+
+
 # ฟังก์ชันสำหรับจัดข้อความให้อยู่ตรงกลาง
 def center_text(text):
     # ดึงขนาดหน้าจอ
@@ -24,27 +26,42 @@ def center_text(text):
 
     return centered_text
 
+
+
+
 # สร้างข้อความ ASCII art ด้วย pyfiglet
-intro = pyfiglet.figlet_format("Welcome\nTo\nGumarun Store", font="cybermedium", width=80)
+intro = pyfiglet.figlet_format("SPAM SMS", font="calvin_s", width=80)
 
 # ฟังก์ชันแสดงข้อความพร้อมดีเลย์
-def print_intro():
+def sms():
     # ใช้ center_text เพื่อจัดข้อความให้อยู่ตรงกลาง
     centered_intro = center_text(intro)
     for line in centered_intro.splitlines():
         print(Fore.YELLOW + line)  # ทำให้ข้อความเป็นสีเหลือง
         time.sleep(0.1)  # เพิ่มดีเลย์เพื่อจำลองแอนิเมชัน
 
+
+
+
+
 # สร้างข้อความ ASCII art ด้วย pyfiglet
-login = pyfiglet.figlet_format("LOGIN", font="cybermedium", width=80)
+GMAIL = pyfiglet.figlet_format("GMAIL", font="calvin_s", width=80)
 
 # ฟังก์ชันแสดงข้อความพร้อมดีเลย์
-def print_login():
+def gmail():
     # ใช้ center_text เพื่อจัดข้อความให้อยู่ตรงกลาง
-    centered_intro = center_text(login)
+    centered_intro = center_text(GMAIL)
     for line in centered_intro.splitlines():
         print(Fore.YELLOW + line)  # ทำให้ข้อความเป็นสีเหลือง
         time.sleep(0.1)  # เพิ่มดีเลย์เพื่อจำลองแอนิเมชัน
+
+
+
+
+
+
+
+
 
 # ฟังก์ชันสำหรับแสดงโลโก้
 def print_logo():
