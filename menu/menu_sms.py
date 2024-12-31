@@ -16,6 +16,7 @@ def clear_console():
 def show_sms_menu():
     while True:
         clear_console()
+        sms()
         print("\n📱 --- เมนู SMS --- 📱\n")
         print("1. sms 42 api")
         print("00. ย้อนกลับ")
