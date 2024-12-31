@@ -12,7 +12,7 @@ def clear_console():
         os.system('clear')
 
 # เมนู SMS
-def show_facebook_menu():
+def show_ip_menu():
     while True:
         clear_console()
         ip()
