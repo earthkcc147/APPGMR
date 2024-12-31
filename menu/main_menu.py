@@ -1,6 +1,7 @@
 # menu/main_menu.py
 from colorama import Fore
-from menu import show_sms_menu, show_email_menu
+from menu import show_sms_menu
+from menu import show_email_menu
 
 def main_menu():
     print("\nยินดีต้อนรับเข้าสู่ Main Menu")
