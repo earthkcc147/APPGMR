@@ -26,7 +26,7 @@ def main_menu():
 
     print(Fore.GREEN + "3. 🎭 Facebook" + Fore.YELLOW + " (ส่ง message)" + Style.RESET_ALL)
     
-    print(Fore.GREEN + "4. 🌐 ip" + Fore.YELLOW + " (ส่ง message)" + Style.RESET_ALL)
+    print(Fore.GREEN + "4. 🌐 ip" + Fore.YELLOW + " (ส่ง DDOS & FLOAT)" + Style.RESET_ALL)
 
     print(Fore.RED + "00. ❌ ออกจากระบบ" + Style.RESET_ALL)
 
