@@ -61,23 +61,22 @@ def menu_all():
         ("❓ Help", "คำถามที่พบบ่อย"),
     ]
 
-    # กำหนดจำนวนแถวและความกว้าง
-    rows_per_column = 10
-    fixed_width = 35  # ปรับความกว้างคงที่ให้เพียงพอ
-    columns = -(-len(menu_options) // rows_per_column)
+    # คำนวณจำนวนแถวและคอลัมน์ให้เหมาะสม
+    max_columns = 3  # กำหนดจำนวนคอลัมน์สูงสุด
+    num_rows = (len(menu_options) + max_columns - 1) // max_columns  # คำนวณจำนวนแถว
 
     # วนลูปเพื่อแสดงเมนู
-    for row in range(rows_per_column):
-        for col in range(columns):
-            index = row + col * rows_per_column
+    for row in range(num_rows):
+        for col in range(max_columns):
+            index = row + col * num_rows
             if index < len(menu_options):
                 option = menu_options[index]
                 left_text = f"{index + 1:02}. {option[0]}"
                 right_text = f"({option[1]})"
-                padding = fixed_width - unicode_length(left_text)  # คำนวณระยะห่าง
+                padding = 35 - unicode_length(left_text)  # คำนวณระยะห่าง
                 # ตรวจสอบว่าเป็นตัวคั่น (---)
                 if option[0] == "---":
-                    print(Fore.YELLOW + "-"*fixed_width + Style.RESET_ALL)
+                    print(Fore.YELLOW + "-"*35 + Style.RESET_ALL)
                 else:
                     print(Fore.GREEN + left_text + Fore.YELLOW + right_text.ljust(padding), end="")
         print()  # จัดให้อยู่ในแถวใหม่
