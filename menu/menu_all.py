@@ -1,18 +1,32 @@
 from colorama import Fore, Style
 import time
 import os
-from banners import print_logo
 import unicodedata
+from banners import print_logo
 
 
 def clear_console():
-    # ล้างหน้าจอคอนโซล
+    """ล้างหน้าจอคอนโซล"""
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def unicode_length(text):
     """คำนวณความยาวข้อความที่รองรับ Unicode"""
-    return sum(2 if unicodedata.east_asian_width(c) in 'WF' else 1 for c in text)
+    length = 0
+    for char in text:
+        if unicodedata.east_asian_width(char) in 'WF':  # W = Wide, F = Full-width
+            length += 2
+        else:
+            length += 1
+    return length
+
+
+def align_text(left_text, right_text, fixed_width):
+    """จัดข้อความให้ตรงโดยใช้ความกว้าง Unicode"""
+    left_length = unicode_length(left_text)
+    right_length = unicode_length(right_text)
+    padding = fixed_width - (left_length + right_length)
+    return left_text + ' ' * max(padding, 0) + right_text
 
 
 def menu_all():
@@ -46,9 +60,9 @@ def menu_all():
         ("❓ Help", "คำถามที่พบบ่อย"),
     ]
 
-    # กำหนดจำนวนแถวและความกว้าง
+    # กำหนดจำนวนแถวต่อคอลัมน์และระยะห่าง
     rows_per_column = 10
-    fixed_width = 35  # ปรับความกว้างคงที่ให้เพียงพอ
+    fixed_width = 35  # ความกว้างคงที่ของแต่ละคอลัมน์
     columns = -(-len(menu_options) // rows_per_column)
 
     # วนลูปเพื่อแสดงเมนู
@@ -59,8 +73,7 @@ def menu_all():
                 option = menu_options[index]
                 left_text = f"{index + 1:02}. {option[0]}"
                 right_text = f"({option[1]})"
-                padding = fixed_width - unicode_length(left_text)  # คำนวณระยะห่าง
-                print(Fore.GREEN + left_text + Fore.YELLOW + right_text.ljust(padding), end="")
+                print(Fore.GREEN + align_text(left_text, right_text, fixed_width), end="")
         print()  # จัดให้อยู่ในแถวใหม่
 
     # เพิ่มตัวเลือกพิเศษ
