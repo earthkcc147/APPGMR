@@ -1,7 +1,7 @@
 import subprocess
 import requests
 import os
-from banners import email
+from banners import facebook
 from colorama import Fore, Back, Style
 
 def clear_console():
@@ -11,11 +11,11 @@ def clear_console():
     else:  # Linux หรือ macOS หรือ Termux
         os.system('clear')
 
-# เมนู fb
+# เมนู SMS
 def show_facebook_menu():
     while True:
         clear_console()
-        email()
+        facebook()
         print(Fore.CYAN + "\n📱 --- เมนู MAILS --- 📱" + Style.RESET_ALL)
         print(Fore.GREEN + "1. 📨 Gmail" + Fore.YELLOW + " (Gmail) " + Style.RESET_ALL)
         print(Fore.YELLOW + "00. 🔙 ย้อนกลับ" + Style.RESET_ALL)
