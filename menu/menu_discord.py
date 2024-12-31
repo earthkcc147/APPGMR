@@ -12,7 +12,7 @@ def clear_console():
         os.system('clear')
 
 # เมนู SMS
-def show_ip_menu():
+def show_discord_menu():
     while True:
         clear_console()
         discord()
