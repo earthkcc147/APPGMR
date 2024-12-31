@@ -69,7 +69,16 @@ def facebook():
         time.sleep(0.1)  # เพิ่มดีเลย์เพื่อจำลองแอนิเมชัน
 
 
+# สร้างข้อความ ASCII art ด้วย pyfiglet
+IP = pyfiglet.figlet_format("DDOS & FLOAT", font="calvin_s", width=80)
 
+# ฟังก์ชันแสดงข้อความพร้อมดีเลย์
+def ip():
+    # ใช้ center_text เพื่อจัดข้อความให้อยู่ตรงกลาง
+    centered_intro = center_text(IP)
+    for line in centered_intro.splitlines():
+        print(Fore.YELLOW + line)  # ทำให้ข้อความเป็นสีเหลือง
+        time.sleep(0.1)  # เพิ่มดีเลย์เพื่อจำลองแอนิเมชัน
 
 
 
