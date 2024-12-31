@@ -64,8 +64,8 @@ def menu_all():
 
     # ตรวจสอบตัวเลือกที่ผู้ใช้เลือก
     if choice == '1':
-        from menu import show_sms_menu
-        show_sms_menu()
+        print(Fore.GREEN + "กำลังรันไฟล์ sms.py..." + Style.RESET_ALL)
+        subprocess.run(["python3", "function/sms/sms1.py"])
     elif choice == '2':
         from menu import show_email_menu
         show_email_menu()
