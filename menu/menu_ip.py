@@ -1,7 +1,7 @@
 import subprocess
 import requests
 import os
-from banners import IP
+from banners import ip
 from colorama import Fore, Back, Style
 
 def clear_console():
@@ -15,8 +15,8 @@ def clear_console():
 def show_facebook_menu():
     while True:
         clear_console()
-        facebook()
-        print(Fore.CYAN + "\n📱 --- เมนู Spam Facebook --- 📱" + Style.RESET_ALL)
+        ip()
+        print(Fore.CYAN + "\n📱 --- เมนู ddos & float --- 📱" + Style.RESET_ALL)
         print(Fore.GREEN + "1. 📨 message" + Fore.YELLOW + " (ข้อความ) " + Style.RESET_ALL)
         print(Fore.GREEN + "2. 💭 comment" + Fore.YELLOW + " (คอมเม้นท์) " + Style.RESET_ALL)
         print(Fore.YELLOW + "00. 🔙 ย้อนกลับ" + Style.RESET_ALL)
