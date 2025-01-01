@@ -12,6 +12,25 @@ def main():
     # ดึงรายชื่อฟอนต์ทั้งหมด
     fonts = pyfiglet.FigletFont.getFonts()
 
+    # แสดงผล ASCII Art บนคอนโซล
+    print("\nผลลัพธ์ ASCII Art:\n")
+    for font in fonts:
+        try:
+            # แปลงข้อความเป็น ASCII Art ด้วยฟอนต์นั้น ๆ
+            ascii_art = pyfiglet.figlet_format(text, font=font)
+            print(f"ฟอนต์: {font}")
+            print(ascii_art)
+            print("-" * 80)  # เส้นคั่นระหว่างฟอนต์
+        except pyfiglet.FontNotFound:
+            # หากเกิดข้อผิดพลาดในการใช้ฟอนต์ ให้ข้ามไป
+            print(f"ฟอนต์ '{font}' ไม่สามารถใช้งานได้")
+
+    # ถามผู้ใช้ว่าจะบันทึกผลลัพธ์ลงไฟล์หรือไม่
+    save_file = input("ต้องการบันทึกผลลัพธ์ลงในไฟล์ .txt หรือไม่? (y/n): ").strip().lower()
+    if save_file != 'y':
+        print("ไม่ได้บันทึกผลลัพธ์")
+        return
+
     # สร้างชื่อไฟล์ .txt
     filename = f"{text}.txt"
     filename = filename.replace(" ", "_")  # แทนที่ช่องว่างในชื่อไฟล์ด้วย "_"
