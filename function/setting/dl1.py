@@ -5,8 +5,11 @@ import requests
 import magic
 import os
 
+# รับ file_id และชื่อไฟล์จากผู้ใช้
+file_id = input("กรุณากรอก file_id ของไฟล์: ")
+file_name_input = input("กรุณากรอกชื่อไฟล์ (ไม่ต้องใส่นามสกุล): ")
+
 # URL ของไฟล์ใน Google Drive
-file_id = '1CbjMU2CjzT9FWTZ3yeJRQ_dOFU6pAn-K'
 url = f'https://drive.google.com/uc?id={file_id}'
 
 # ส่งคำขอไปยัง URL
@@ -40,8 +43,8 @@ elif 'jpeg' in file_type or 'jpg' in file_type:
 else:
     file_extension = '.bin'  # ถ้าไม่สามารถตรวจสอบประเภทได้
 
-# ตั้งชื่อไฟล์
-file_name = f"downloaded_file{file_extension}"
+# ตั้งชื่อไฟล์ที่รับจากผู้ใช้ และเพิ่มนามสกุลไฟล์
+file_name = f"{file_name_input}{file_extension}"
 
 # เขียนไฟล์ลงในเครื่อง
 with open(file_name, 'wb') as f:
