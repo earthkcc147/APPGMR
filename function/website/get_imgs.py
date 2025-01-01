@@ -73,22 +73,12 @@ def main(url, path):
 
 
 if __name__ == "__main__":
-    import argparse
-    parser = argparse.ArgumentParser(description="สคริปต์นี้ใช้สำหรับดาวน์โหลดรูปภาพทั้งหมดจากหน้าเว็บ")
-    parser.add_argument("url", help="URL ของหน้าเว็บที่ต้องการดาวน์โหลดรูปภาพ")
-    parser.add_argument("-p", "--path", help="โฟลเดอร์ที่ต้องการเก็บรูปภาพ (ค่าเริ่มต้นคือชื่อโดเมนของ URL)")
-
-    args = parser.parse_args()
-    url = args.url
-    path = args.path
+    # รับค่า URL จากผู้ใช้
+    url = input("กรุณากรอก URL ของหน้าเว็บที่ต้องการดาวน์โหลดรูปภาพ: ")
+    path = input("กรุณากรอกโฟลเดอร์ที่ต้องการเก็บรูปภาพ (กด Enter เพื่อใช้ชื่อโดเมนของ URL): ")
 
     if not path:
         # หากไม่ได้ระบุ path ใช้ชื่อโดเมนของ URL เป็นชื่อโฟลเดอร์
         path = urlparse(url).netloc
 
     main(url, path)
-
-
-
-
-มีการสร้างโฟลเดอร์และไฟล์ไหม
