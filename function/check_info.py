@@ -153,13 +153,38 @@ def get_macbook_info():
         print(f"เกิดข้อผิดพลาด: {e}")
         return {}
 
+def get_raspberry_pi_info():
+    """ดึงข้อมูลระบบของ Raspberry Pi"""
+    try:
+        commands = {
+            "ชื่อเครื่อง": "hostname",
+            "ระบบปฏิบัติการ": "uname -o",
+            "เวอร์ชัน OS": "uname -r",
+            "CPU": "cat /proc/cpuinfo | grep 'model name'",
+            "จำนวนคอร์ของ CPU": "nproc",
+            "RAM": "free -h | grep Mem",
+            "พื้นที่เก็บข้อมูล": "df -h / | grep /",
+            "ที่อยู่ IP": "hostname -I",
+            "จำนวนกระบวนการที่ทำงาน": "ps aux | wc -l",
+            "รายละเอียดการเชื่อมต่อเครือข่าย": "ifconfig | grep inet",
+            "สถานะ Wi-Fi": "iw dev wlan0 link",
+        }
+        info = {}
+        for key, cmd in commands.items():
+            result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+            info[key] = result.stdout.strip()
+        return info
+    except Exception as e:
+        print(f"เกิดข้อผิดพลาด: {e}")
+        return {}
+
 def get_device_info():
     """ดึงข้อมูลระบบของอุปกรณ์ต่าง ๆ"""
     device = platform.system()
 
     if device == "Linux":
-        # Android
-        return get_android_device_info()
+        # สำหรับ Android หรือ Raspberry Pi
+        return get_android_device_info() if platform.system().find('Android') != -1 else get_raspberry_pi_info()
     elif device == "Darwin":
         # Mac OS (Macbook)
         return get_macbook_info()
