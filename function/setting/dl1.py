@@ -1,0 +1,50 @@
+pkg install file
+pip install python-magic
+
+import requests
+import magic
+import os
+
+# URL ของไฟล์ใน Google Drive
+file_id = '1CbjMU2CjzT9FWTZ3yeJRQ_dOFU6pAn-K'
+url = f'https://drive.google.com/uc?id={file_id}'
+
+# ส่งคำขอไปยัง URL
+response = requests.get(url, stream=True)
+
+# ตรวจสอบประเภทของไฟล์ด้วย python-magic
+file_type = magic.from_buffer(response.content, mime=True)
+
+# แสดงประเภทไฟล์
+print("ประเภทไฟล์:", file_type)
+
+# ตั้งนามสกุลไฟล์ให้เหมาะสมจากประเภท MIME
+if 'pdf' in file_type:
+    file_extension = '.pdf'
+elif 'zip' in file_type:
+    file_extension = '.zip'
+elif 'rar' in file_type:
+    file_extension = '.rar'
+elif 'msword' in file_type:
+    file_extension = '.doc'
+elif 'vnd.openxmlformats-officedocument.wordprocessingml.document' in file_type:
+    file_extension = '.docx'
+elif 'mp4' in file_type:
+    file_extension = '.mp4'
+elif 'mp3' in file_type:
+    file_extension = '.mp3'
+elif 'png' in file_type:
+    file_extension = '.png'
+elif 'jpeg' in file_type or 'jpg' in file_type:
+    file_extension = '.jpg'  # รองรับทั้ง .jpg และ .jpeg
+else:
+    file_extension = '.bin'  # ถ้าไม่สามารถตรวจสอบประเภทได้
+
+# ตั้งชื่อไฟล์
+file_name = f"downloaded_file{file_extension}"
+
+# เขียนไฟล์ลงในเครื่อง
+with open(file_name, 'wb') as f:
+    f.write(response.content)
+
+print(f"ดาวน์โหลดไฟล์สำเร็จ: {file_name}")
