@@ -168,6 +168,14 @@ def get_raspberry_pi_info():
             "จำนวนกระบวนการที่ทำงาน": "ps aux | wc -l",
             "รายละเอียดการเชื่อมต่อเครือข่าย": "ifconfig | grep inet",
             "สถานะ Wi-Fi": "iw dev wlan0 link",
+            "การใช้งาน CPU": "top -n 1 | grep Cpu",
+            "การใช้พื้นที่ดิสก์": "df -h",
+            "การใช้พื้นที่ /tmp": "df -h /tmp",
+            "ข้อมูลการเชื่อมต่อ GPIO": "gpio readall",
+            "อุณหภูมิของ CPU": "cat /sys/class/thermal/thermal_zone0/temp",
+            "สถานะการทำงานของอุปกรณ์": "vcgencmd get_mem arm && vcgencmd get_mem gpu",
+            "แรงดันไฟฟ้า 3.3V": "vcgencmd measure_volts 3.3v",
+            "แรงดันไฟฟ้า 5V": "vcgencmd measure_volts 5v",
         }
         info = {}
         for key, cmd in commands.items():
