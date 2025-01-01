@@ -7,9 +7,9 @@ session_file = 'session_name.session'
 
 # ลบไฟล์เซสชันถ้ามี
 # Uncomment this if you want to delete the session file each time
-# if os.path.exists(session_file):
-#     os.remove(session_file)
-#     print("ไฟล์เซสชันถูกลบเรียบร้อยแล้ว")
+if os.path.exists(session_file):
+    os.remove(session_file)
+    print("ไฟล์เซสชันถูกลบเรียบร้อยแล้ว")
 
 # ตั้งค่าข้อมูลที่ได้รับจาก Telegram
 # api_id = '23655938'  # แทนที่ด้วย api_id ของคุณ
