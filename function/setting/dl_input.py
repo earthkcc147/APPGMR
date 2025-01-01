@@ -1,3 +1,6 @@
+# pkg install file
+# pip install python-magic
+
 import requests
 import magic
 
