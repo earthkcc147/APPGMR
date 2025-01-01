@@ -1,15 +1,27 @@
 import requests
 import json
+import datetime
 
-# รับข้อมูลวันที่ เดือน และปี จากผู้ใช้
-date = input("กรุณาป้อนวันที่ (เช่น 01): ")
-month = input("กรุณาป้อนเดือน (เช่น 03): ")
-year = input("กรุณาป้อนปี (เช่น 2024): ")
+# ฟังก์ชั่นที่ใช้ตรวจสอบวันที่
+def get_lottery_date():
+    today = datetime.date.today()  # รับวันที่ปัจจุบัน
+    if today.day > 15:
+        return 16
+    else:
+        return 1
+
+# รับหมายเลขที่ต้องการตรวจสอบ
+number = input("กรุณาป้อนหมายเลขที่ต้องการตรวจสอบ: ")
+
+# ตรวจสอบวันที่
+date = get_lottery_date()
+month = str(datetime.date.today().month).zfill(2)  # รับเดือนปัจจุบัน
+year = str(datetime.date.today().year)  # รับปีปัจจุบัน
 
 # กำหนด URL และข้อมูลที่จะส่ง
 url = "https://www.glo.or.th/api/checking/getLotteryResult"
 data = {
-    "date": date,
+    "date": str(date).zfill(2),  # เปลี่ยนวันที่ให้เป็นรูปแบบสองหลัก
     "month": month,
     "year": year
 }
@@ -25,8 +37,7 @@ if response.status_code == 200:
         result = result_data["response"]["result"]
         
         # แสดงผลข้อมูลจาก API
-        print("\nผลการออกรางวัลสลากกินแบ่งรัฐบาล:")
-        print(f"วันที่: {result['displayDate']}")
+        print(f"\nผลการออกรางวัลสลากกินแบ่งรัฐบาล ประจำวันที่ {date}/{month}/{year}:")
         print(f"ชุดที่: {result['period']}")
         print(f"ลิงก์ YouTube: {result['youtube_url']}")
         print(f"ลิงก์ PDF: {result['pdf_url']}")
@@ -69,4 +80,3 @@ if response.status_code == 200:
         print("ไม่พบข้อมูลผลการออกรางวัลในคำตอบที่ได้")
 else:
     print(f"เกิดข้อผิดพลาดในการร้องขอข้อมูล (HTTP Status: {response.status_code})")
-
