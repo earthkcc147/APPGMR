@@ -3,28 +3,28 @@
 import smtplib
 from email.mime.text import MIMEText
 
-GMAIL_LOGIN = 'myemail@gmail.com'
-GMAIL_PASSWORD = 'password'
-
-def send_email(subject, message, from_addr=GMAIL_LOGIN, to_addr=''):
-    if not to_addr:
-        to_addr = input("กรุณากรอกที่อยู่อีเมลผู้รับ: ")  # ถ้าผู้ใช้ไม่ได้ระบุที่อยู่อีเมล ให้ถามผู้ใช้
-
+def send_email(subject, message, from_addr, from_password, to_addr):
     msg = MIMEText(message)
     msg['Subject'] = subject
     msg['From'] = from_addr
     msg['To'] = to_addr
 
-    server = smtplib.SMTP('smtp.gmail.com', 587)  # port 465 or 587
-    server.ehlo()
-    server.starttls()
-    server.ehlo()
-    server.login(GMAIL_LOGIN, GMAIL_PASSWORD)
-    server.sendmail(from_addr, to_addr, msg.as_string())
-    server.close()
+    try:
+        server = smtplib.SMTP('smtp.gmail.com', 587)  # ใช้พอร์ต 587
+        server.ehlo()
+        server.starttls()
+        server.ehlo()
+        server.login(from_addr, from_password)
+        server.sendmail(from_addr, to_addr, msg.as_string())
+        server.close()
+        print("ส่งอีเมลสำเร็จ")
+    except Exception as e:
+        print(f"เกิดข้อผิดพลาด: {e}")
 
 if __name__ == "__main__":
+    gmail_login = input("กรุณากรอก Gmail ของคุณ: ")
+    gmail_password = input("กรุณากรอกรหัสผ่าน Gmail ของคุณ: ")
     subject = input("กรุณากรอกหัวข้อของอีเมล: ")
     message = input("กรุณากรอกข้อความของอีเมล: ")
     to_address = input("กรุณากรอกที่อยู่อีเมลผู้รับ: ")
-    send_email(subject, message, to_addr=to_address)
+    send_email(subject, message, from_addr=gmail_login, from_password=gmail_password, to_addr=to_address)
