@@ -27,6 +27,7 @@ def menu_all():
     menu_options = [
         ("📨 SMS", "SPAM 42api"),
         ("📧 Gmail", "SPAM Gmail"),
+        ("📧 Gmail", "SEND Gmail Custom"),
         ("👥 Facebook", "Message"),
         ("👥 Facebook", "Comment"),
         ("🎭 Discord", "Copy Discord"),
