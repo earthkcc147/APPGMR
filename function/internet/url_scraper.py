@@ -5,8 +5,11 @@ import os
 
 def get_urls_from_json(filename="links.json"):
     """อ่าน URL จากไฟล์ JSON หากไม่พบจะสร้างไฟล์ใหม่พร้อมข้อมูลตัวอย่าง"""
-    if os.path.exists(filename):
-        with open(filename, 'r') as f:
+    # ใช้ os.path.join เพื่อให้ไฟล์อยู่ในที่เดียวกับโปรแกรม
+    filepath = os.path.join(os.getcwd(), filename)
+    
+    if os.path.exists(filepath):
+        with open(filepath, 'r') as f:
             return json.load(f)
     else:
         # สร้างไฟล์ใหม่พร้อม URL ตัวอย่าง
@@ -15,7 +18,7 @@ def get_urls_from_json(filename="links.json"):
             'https://b2c-api-premiumlabel-production.azurewebsites.net/api/b2c/page/menu?id_loja=2692',
             'https://b2c-api-premiumlabel-production.azurewebsites.net/api/b2c/page/menu?id_loja=2693'
         ]
-        with open(filename, 'w') as f:
+        with open(filepath, 'w') as f:
             json.dump(example_urls, f, indent=4)
         return example_urls
 
