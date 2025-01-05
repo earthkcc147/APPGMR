@@ -21,38 +21,35 @@ import os
 import time
 
 # วิธีใช้งาน:
-# ตั้งค่าตัวแปรด้านล่างนี้ให้เป็นค่าที่คุณต้องการ
+# ตั้งค่าตัวแปรสภาพแวดล้อม:
+# ตั้งค่าตัวแปร IG_USERNAME ให้เป็นชื่อผู้ใช้งาน Instagram ที่คุณต้องการตรวจสอบ เช่น ladygaga
+# ตั้งค่าตัวแปร WEBHOOK_URL ให้เป็น URL ของ Discord webhook (หากไม่รู้วิธีสร้าง webhook บน Discord ให้ค้นหาใน Google)
+# ตั้งค่า TIME_INTERVAL ให้เป็นเวลาในหน่วยวินาทีระหว่างการตรวจสอบแต่ละครั้ง เช่น 1.5, 600 (ค่าพื้นฐาน=600)
+# วิธีการตั้งค่าตัวแปรสภาพแวดล้อม: https://www.serverlab.ca/tutorials/linux/administration-linux/how-to-set-environment-variables-in-linux/
 
-INSTAGRAM_USERNAME = "ชื่อผู้ใช้Instagram"  # ตั้งค่าชื่อผู้ใช้ Instagram ที่คุณต้องการตรวจสอบ
-WEBHOOK_URL = "https://discord.com/api/webhooks/xxxx/xxxxx"  # ตั้งค่า Discord webhook URL ของคุณ
-TIME_INTERVAL = 600  # ตั้งเวลาระหว่างการตรวจสอบ (ในหน่วยวินาที) เช่น 600 = 10 นาที
+INSTAGRAM_USERNAME = "ladygaga"  # เปลี่ยนให้เป็น Instagram username ที่คุณต้องการตรวจสอบ
+WEBHOOK_URL = "https://discord.com/api/webhooks/your-webhook-url"  # เปลี่ยนให้เป็น URL ของ Discord webhook
+TIME_INTERVAL = 600  # เวลาระหว่างการตรวจสอบ (ในหน่วยวินาที)
 
 # ----------------------- ไม่ควรแก้ไขในส่วนนี้ ----------------------- #
 
-
 def get_user_fullname(html):
-    return html.json()["graphql"]["user"]["full_name"]
-
+    return html["graphql"]["user"]["full_name"]
 
 def get_total_photos(html):
-    return int(html.json()["graphql"]["user"]["edge_owner_to_timeline_media"]["count"])
-
+    return int(html["graphql"]["user"]["edge_owner_to_timeline_media"]["count"])
 
 def get_last_publication_url(html):
-    return html.json()["graphql"]["user"]["edge_owner_to_timeline_media"]["edges"][0]["node"]["shortcode"]
-
+    return html["graphql"]["user"]["edge_owner_to_timeline_media"]["edges"][0]["node"]["shortcode"]
 
 def get_last_photo_url(html):
-    return html.json()["graphql"]["user"]["edge_owner_to_timeline_media"]["edges"][0]["node"]["display_url"]
-
+    return html["graphql"]["user"]["edge_owner_to_timeline_media"]["edges"][0]["node"]["display_url"]
 
 def get_last_thumb_url(html):
-    return html.json()["graphql"]["user"]["edge_owner_to_timeline_media"]["edges"][0]["node"]["thumbnail_src"]
-
+    return html["graphql"]["user"]["edge_owner_to_timeline_media"]["edges"][0]["node"]["thumbnail_src"]
 
 def get_description_photo(html):
-    return html.json()["graphql"]["user"]["edge_owner_to_timeline_media"]["edges"][0]["node"]["edge_media_to_caption"]["edges"][0]["node"]["text"]
-
+    return html["graphql"]["user"]["edge_owner_to_timeline_media"]["edges"][0]["node"]["edge_media_to_caption"]["edges"][0]["node"]["text"]
 
 def webhook(webhook_url, html):
     # สำหรับพารามิเตอร์ทั้งหมด ดูได้ที่ https://discordapp.com/developers/docs/resources/webhook#execute-webhook
@@ -61,51 +58,68 @@ def webhook(webhook_url, html):
     data["embeds"] = []
     embed = {}
     embed["color"] = 15467852
-    embed["title"] = "รูปภาพใหม่จาก @"+INSTAGRAM_USERNAME+""
-    embed["url"] = "https://www.instagram.com/p/" + \
-        get_last_publication_url(html)+"/"
+    embed["title"] = "รูปภาพใหม่จาก @" + INSTAGRAM_USERNAME + ""
+    embed["url"] = "https://www.instagram.com/p/" + get_last_publication_url(html) + "/"
     embed["description"] = get_description_photo(html)
     # embed["image"] = {"url":get_last_thumb_url(html)} # ลบเครื่องหมายคอมเมนต์เพื่อโพสต์ภาพขนาดใหญ่
     embed["thumbnail"] = {"url": get_last_thumb_url(html)}
     data["embeds"].append(embed)
-    result = requests.post(webhook_url, data=json.dumps(
-        data), headers={"Content-Type": "application/json"})
+    result = requests.post(webhook_url, data=json.dumps(data), headers={"Content-Type": "application/json"})
     try:
         result.raise_for_status()
     except requests.exceptions.HTTPError as err:
         print(err)
     else:
-        print("รูปภาพถูกโพสต์ใน Discord สำเร็จ รหัส {}.".format(
-            result.status_code))
-
+        print("รูปภาพถูกโพสต์ใน Discord สำเร็จ รหัส {}.".format(result.status_code))
 
 def get_instagram_html(INSTAGRAM_USERNAME):
     headers = {
         "Host": "www.instagram.com",
         "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11"
     }
-    html = requests.get("https://www.instagram.com/" +
-                        INSTAGRAM_USERNAME + "/feed/?__a=1", headers=headers)
-    return html
+    response = requests.get("https://www.instagram.com/" + INSTAGRAM_USERNAME + "/feed/?__a=1", headers=headers)
 
+    # ตรวจสอบการตอบกลับว่าเป็น HTTP 200 หรือไม่
+    if response.status_code == 403:
+        print("บัญชี Instagram ถูกจำกัดการเข้าถึงหรือถูกล็อค.")
+        return None
+    elif response.status_code == 429:
+        print("เกิดข้อผิดพลาดจาก Instagram: การร้องขอมากเกินไป, โปรดลองใหม่ในภายหลัง.")
+        return None
+    elif response.status_code != 200:
+        print(f"การเชื่อมต่อล้มเหลว! สถานะ: {response.status_code}")
+        return None
+    
+    # ตรวจสอบว่าเนื้อหาที่ได้รับเป็น JSON หรือไม่
+    try:
+        json_data = response.json()
+        return json_data
+    except ValueError:
+        print("ไม่สามารถแปลงข้อมูลเป็น JSON ได้.")
+        return None
 
 def main():
     try:
         html = get_instagram_html(INSTAGRAM_USERNAME)
-        if(os.environ.get("LAST_IMAGE_ID") == get_last_publication_url(html)):
+        if html is None:
+            print("ไม่สามารถดึงข้อมูลจาก Instagram ได้.")
+            return
+        
+        last_image_id = os.getenv("LAST_IMAGE_ID")
+        current_image_id = get_last_publication_url(html)
+        
+        if last_image_id == current_image_id:
             print("ไม่มีรูปภาพใหม่ที่จะโพสต์ใน Discord.")
         else:
-            os.environ["LAST_IMAGE_ID"] = get_last_publication_url(html)
+            os.environ["LAST_IMAGE_ID"] = current_image_id
             print("พบรูปภาพใหม่ที่จะโพสต์ใน Discord.")
-            webhook(WEBHOOK_URL, get_instagram_html(INSTAGRAM_USERNAME))
+            webhook(WEBHOOK_URL, html)
     except Exception as e:
-        print(e)
-
+        print(f"เกิดข้อผิดพลาด: {e}")
 
 if __name__ == "__main__":
-    if INSTAGRAM_USERNAME != None and WEBHOOK_URL != None:
-        while True:
-            main()
-            time.sleep(TIME_INTERVAL)  # 600 = 10 นาที
-    else:
-        print('โปรดตั้งค่าตัวแปรให้ถูกต้อง!')
+    while True:
+        main()
+        time.sleep(TIME_INTERVAL)  # 600 = 10 นาที
+
+
