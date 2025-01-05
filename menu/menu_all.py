@@ -26,6 +26,7 @@ def menu_all():
     # รายการตัวเลือกในเมนู
     menu_options = [
         ("📨 SMS", "SPAM 42api"),
+        ("📧 Gmail", "HACK Gmail"),
         ("📧 Gmail", "SPAM Gmail"),
         ("📧 Gmail", "SEND Gmail Custom"),
         ("👥 Facebook", "Message"),
