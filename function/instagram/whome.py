@@ -34,13 +34,13 @@ def getUserId(username, sessionsId):
         id = info["logging_page_id"].strip("profilePage_")
         return({"id": id, "error": None})
     except:
-        return({"id": None, "error": "User not found or rate limit"})
+        return({"id": None, "error": "ไม่พบผู้ใช้หรือเกินการจำกัดการร้องขอ"})
 
 
 def getInfo(username, sessionId):
     userId = getUserId(username, sessionId)
     if userId["error"] != None:
-        return({"user": None, "error": "User not found or rate limit"})
+        return({"user": None, "error": "ไม่พบผู้ใช้หรือเกินการจำกัดการร้องขอ"})
     else:
         cookies = {'sessionid': sessionId}
         headers = {'User-Agent': 'Instagram 64.0.0.14.96', }
@@ -82,7 +82,7 @@ def advanced_lookup(username):
         rep = r.json()
         return({"user": rep, "error": None})
     except:
-        return({"user": None, "error": "rate limit"})
+        return({"user": None, "error": "เกินการจำกัดการร้องขอ"})
 
 
 def dumpor(name):
@@ -101,7 +101,7 @@ def dumpor(name):
             account_list.append(account.text)
         return({"user": account_list, "error": None})
     except:
-        return({"user": None, "error": "rate limit"})
+        return({"user": None, "error": "เกินการจำกัดการร้องขอ"})
 
 
 def main():
@@ -111,12 +111,12 @@ def main():
     parser.add_argument('-s', '--sessionid',
                         help="Instagram session ID", required=True)
     parser.add_argument(
-        '-n', '--name', help="Target name & surname", required=True)
-    parser.add_argument('-e', '--email', help="Target email", required=True)
+        '-n', '--name', help="ชื่อและนามสกุลของเป้าหมาย", required=True)
+    parser.add_argument('-e', '--email', help="อีเมลของเป้าหมาย", required=True)
     parser.add_argument(
-        '-p', '--phone', help="Target phone number", required=True)
+        '-p', '--phone', help="หมายเลขโทรศัพท์ของเป้าหมาย", required=True)
     parser.add_argument('-t', '--timeout',
-                        help="Timeout between requests", required=False)
+                        help="เวลาในการหยุดระหว่างการร้องขอ", required=False)
 
     args = parser.parse_args()
 
@@ -139,88 +139,88 @@ def main():
             else:
                 infos = infos["user"]
 
-                print("\nInformation about      : " + infos["username"])
+                print("\nข้อมูลเกี่ยวกับ      : " + infos["username"])
                 if(infos["full_name"].lower() == name.lower()):
-                    print(Fore.GREEN + "Full Name              : " +
+                    print(Fore.GREEN + "ชื่อเต็ม              : " +
                           infos["full_name"] + " \u2713")
                     name_f = 1
                 else:
-                    print("Full Name              : " + infos["full_name"])
+                    print("ชื่อเต็ม              : " + infos["full_name"])
                 print("User ID                : " + infos["userID"])
-                print("Verified               : " + str(infos['is_verified']))
-                print("Is business Account    : " + str(infos["is_business"]))
-                print("Is private Account     : " + str(infos["is_private"]))
-                print("Followers              : " +
+                print("ยืนยันบัญชี           : " + str(infos['is_verified']))
+                print("บัญชีธุรกิจ           : " + str(infos["is_business"]))
+                print("บัญชีส่วนตัว           : " + str(infos["is_private"]))
+                print("ผู้ติดตาม              : " +
                       str(infos["follower_count"]))
-                print("Following              : " +
+                print("กำลังติดตาม            : " +
                       str(infos["following_count"]))
-                print("Number of posts        : " + str(infos["media_count"]))
-                print("External URL           : " + infos["external_url"])
-                print("Biography              : " + infos["biography"])
+                print("จำนวนโพสต์            : " + str(infos["media_count"]))
+                print("ลิงก์ภายนอก            : " + infos["external_url"])
+                print("ชีวประวัติ             : " + infos["biography"])
                 if "public_email" in infos.keys():
                     if infos["public_email"] != '':
                         if(email != ' ' and infos["public_email"][0] == email[0] and infos["public_email"].split('@')[0][-1] == email.split('@')[0][-1]
                                     and infos["public_email"].split('@')[1] == email.split('@')[1]):
-                            print(Fore.GREEN + "Public email           : " +
+                            print(Fore.GREEN + "อีเมลสาธารณะ         : " +
                                   infos["public_email"] + " \u2713")
                             email_f = 1
                         else:
-                            print("Public email           : " +
+                            print("อีเมลสาธารณะ         : " +
                                   infos["public_email"])
 
                 if "public_phone_number" in infos.keys():
                     if str(infos["public_phone_number"]) != '':
                         if(phone != ' ' and str(infos["public_phone_number"]).split()[0] == phone.split()[0] and str(infos["public_phone_number"])[-2:] == phone[-2:]):
-                            print(Fore.GREEN + "Public phone number    : " +
+                            print(Fore.GREEN + "หมายเลขโทรศัพท์สาธารณะ : " +
                                   str(infos["public_phone_number"]) + " \u2713")
                             phone_f = 1
                         else:
-                            print("Public phone    : " +
+                            print("หมายเลขโทรศัพท์    : " +
                                   str(infos["public_phone_number"]))
 
                 other_infos = advanced_lookup(account[1:])
-                if other_infos["error"] == "rate limit":
-                    print("Rate limit please wait a few minutes before you try again")
+                if other_infos["error"] == "เกินการจำกัดการร้องขอ":
+                    print("เกินการจำกัดการร้องขอ กรุณารอสักครู่ก่อนลองใหม่")
                 elif "message" in other_infos["user"].keys():
-                    if other_infos["user"]["message"] == "No users found":
-                        print("The lookup did not work on this account")
+                    if other_infos["user"]["message"] == "ไม่พบผู้ใช้":
+                        print("การค้นหานี้ไม่ได้ผลในบัญชีนี้")
                     else:
                         sys.exit(
-                            Fore.RED + "Rate limit! Please, wait a few minutes before running the script again.")
+                            Fore.RED + "เกินการจำกัดการร้องขอ! กรุณารอสักครู่ก่อนดำเนินการอีกครั้ง")
                 else:
                     if "obfuscated_email" in other_infos["user"].keys():
                         if other_infos["user"]["obfuscated_email"] != '':
                             if(email != ' ' and other_infos["user"]["obfuscated_email"][0] == email[0] and other_infos["user"]["obfuscated_email"][8] == email.split('@')[0][-1]
                                     and other_infos["user"]["obfuscated_email"].split('@')[1] == email.split('@')[1]):
-                                print(Fore.GREEN + "Obfuscated email       : " +
+                                print(Fore.GREEN + "อีเมลที่ถูกซ่อน      : " +
                                       other_infos["user"]["obfuscated_email"] + " \u2713")
                                 email_f = 1
                             else:
-                                print("Obfuscated email       : " +
+                                print("อีเมลที่ถูกซ่อน      : " +
                                       other_infos["user"]["obfuscated_email"])
 
                         else:
-                            print("No obfuscated email found")
+                            print("ไม่พบอีเมลที่ถูกซ่อน")
 
                     if "obfuscated_phone" in other_infos["user"].keys():
                         if str(other_infos["user"]["obfuscated_phone"]) != '':
                             if(phone != ' ' and str(other_infos["user"]["obfuscated_phone"].split()[0]) == phone.split()[0] and str(other_infos["user"]["obfuscated_phone"])[-2:] == phone[-2:]):
-                                print(Fore.GREEN + "Obfuscated phone       : " +
+                                print(Fore.GREEN + "หมายเลขโทรศัพท์ที่ซ่อนอยู่   : " +
                                       str(other_infos["user"]["obfuscated_phone"]) + " \u2713")
                                 phone_f = 1
                             else:
-                                print("Obfuscated phone       : " +
+                                print("หมายเลขโทรศัพท์ที่ซ่อนอยู่       : " +
                                       str(other_infos["user"]["obfuscated_phone"]))
                         else:
-                            print("No obfuscated phone found")
+                            print("ไม่พบหมายเลขโทรศัพท์ที่ซ่อนอยู่")
 
-                print("Profile Picture        : " +
+                print("รูปโปรไฟล์            : " +
                       infos["hd_profile_pic_url_info"]["url"] + "\n")
 
             if(name_f + email_f + phone_f == 3):
                 print(Fore.CYAN + "[*] " + Fore.GREEN + "Profile ID " +
-                      infos["userID"] + " match level: HIGH\n")
-                usr_choice = input("Stop searching? Y/n ")
+                      infos["userID"] + " ระดับการจับคู่: สูง\n")
+                usr_choice = input("หยุดการค้นหาหรือไม่? Y/n ")
                 if(usr_choice.lower() == 'y'):
                     sys.exit(0)
                 else:
@@ -228,11 +228,11 @@ def main():
 
             elif(name_f + email_f + phone_f == 2):
                 print(Fore.CYAN + "[*] " + Fore.YELLOW + "Profile ID " +
-                      infos["userID"] + " match level: MEDIUM\n")
+                      infos["userID"] + " ระดับการจับคู่: ปานกลาง\n")
 
             elif(name_f + email_f + phone_f == 1):
-                print(Fore.CYAN + "[*] " + Fore.RED + "Profile with ID " +
-                      infos["userID"] + " match level: LOW\n")
+                print(Fore.CYAN + "[*] " + Fore.RED + "Profile ที่มี ID " +
+                      infos["userID"] + " ระดับการจับคู่: ต่ำ\n")
 
             print("-"*30)
 
@@ -242,4 +242,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
