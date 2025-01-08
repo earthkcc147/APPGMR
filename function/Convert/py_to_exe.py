@@ -34,9 +34,18 @@ def show_files():
 
 def generate_executable():
     create_directory()
-    py_files = [f for f in os.listdir(PY_TO_EXE_DIR) if f.endswith('.py')]
-    if not py_files:
-        print("ไม่พบไฟล์ .py ในโฟลเดอร์ py")
+    
+    # ตรวจสอบว่าโฟลเดอร์ py มีไฟล์ .py หรือไม่
+    try:
+        py_files = [f for f in os.listdir(PY_TO_EXE_DIR) if f.endswith('.py')]
+        if not py_files:
+            print("ไม่พบไฟล์ .py ในโฟลเดอร์ py")
+            return
+    except FileNotFoundError:
+        print(f"ไม่พบโฟลเดอร์ {PY_TO_EXE_DIR}. กรุณาตรวจสอบอีกครั้ง.")
+        return
+    except Exception as e:
+        print(f"เกิดข้อผิดพลาดในการอ่านไฟล์ในโฟลเดอร์ {PY_TO_EXE_DIR}: {e}")
         return
 
     print("ไฟล์ .py ที่พบใน py:")
@@ -50,33 +59,65 @@ def generate_executable():
             return
         script_name = py_files[file_choice - 1]
         script_path = os.path.join(PY_TO_EXE_DIR, script_name)
-        
-        print(f'Generating executable for {script_name}...')
+
+        print(f'กำลังสร้างไฟล์ executable สำหรับ {script_name}...')
+
+        # ตรวจสอบว่าไฟล์ .py ที่เลือกมีอยู่จริง
+        if not os.path.exists(script_path):
+            print(f"ไม่พบไฟล์ {script_name} ในโฟลเดอร์ {PY_TO_EXE_DIR}")
+            return
+
         exe_name = script_name[:-3] + '.exe'
         exe_path = os.path.join(EXE_DIR, exe_name)
 
-        os.system(f'python -m PyInstaller {script_path} --onefile --distpath {EXE_DIR}')
+        try:
+            # ใช้ PyInstaller เพื่อสร้างไฟล์ .exe
+            os.system(f'python -m PyInstaller {script_path} --onefile --distpath {EXE_DIR}')
+        except Exception as e:
+            print(f"เกิดข้อผิดพลาดในการสร้าง executable: {e}")
+            return
 
         if REMOVE_SPEC:
-            print(f'Removing {script_name[:-3]}.spec file...')
-            os.remove(f'{script_name[:-3]}.spec')
+            try:
+                print(f'กำลังลบไฟล์ .spec ของ {script_name[:-3]}...')
+                os.remove(f'{script_name[:-3]}.spec')
+            except FileNotFoundError:
+                print(f"ไม่พบไฟล์ .spec เพื่อทำการลบ")
+            except Exception as e:
+                print(f"เกิดข้อผิดพลาดในการลบไฟล์ .spec: {e}")
+
         if REMOVE_BUILD:
-            print('Removing build directory...')
-            rmtree('build')
+            try:
+                print('กำลังลบโฟลเดอร์ build...')
+                rmtree('build')
+            except FileNotFoundError:
+                print("ไม่พบโฟลเดอร์ build เพื่อทำการลบ")
+            except Exception as e:
+                print(f"เกิดข้อผิดพลาดในการลบโฟลเดอร์ build: {e}")
 
         # ถามว่าต้องการบีบอัดเป็น .zip หรือไม่
-        zip_choice = input("ต้องการบีบอัดไฟล์เป็น .zip หรือไม่? (y/n, กด Enter เพื่อไม่บีบอัด): ").lower()
+        while True:
+            zip_choice = input("ต้องการบีบอัดไฟล์เป็น .zip หรือไม่? (กรอก y/n): ").lower()
+            if zip_choice == 'y' or zip_choice == 'n':
+                break
+            else:
+                print("คำตอบไม่ถูกต้อง กรุณากรอก 'y' หรือ 'n'.")
+
         if zip_choice == 'y':
             zip_name = exe_name[:-4]
             password = input("กรุณาใส่รหัสผ่านสำหรับ zip (กด Enter เพื่อไม่ตั้งรหัส): ")
-            zip_path = os.path.join(EXE_DIR, f"{zip_name}_{password if password else 'no-pass'}.zip")
-            with ZipFile(zip_path, 'w', ZIP_DEFLATED) as zipf:
-                zipf.write(exe_path, arcname=exe_name)
-                if password:
-                    zipf.setpassword(password.encode('utf-8'))
-            print(f"ไฟล์ถูกบีบอัดและบันทึกที่ {zip_path}")
-            file_to_send = zip_path
-        else:  # หากผู้ใช้กด Enter หรือเลือกไม่บีบอัด
+            try:
+                zip_path = os.path.join(EXE_DIR, f"{zip_name}_{password if password else 'no-pass'}.zip")
+                with ZipFile(zip_path, 'w', ZIP_DEFLATED) as zipf:
+                    zipf.write(exe_path, arcname=exe_name)
+                    if password:
+                        zipf.setpassword(password.encode('utf-8'))
+                print(f"ไฟล์ถูกบีบอัดและบันทึกที่ {zip_path}")
+                file_to_send = zip_path
+            except Exception as e:
+                print(f"เกิดข้อผิดพลาดในการบีบอัดไฟล์: {e}")
+                return
+        else:
             file_to_send = exe_path
 
         if SEND_TO_WEBHOOK:
@@ -84,12 +125,12 @@ def generate_executable():
                 "username": "Executable Generator",
                 "embeds": [
                     {
-                        "title": "Executable Generation Status",
-                        "description": f"Executable for `{script_name}` has been generated successfully!",
+                        "title": "สถานะการสร้าง Executable",
+                        "description": f"ไฟล์ `{script_name}` ถูกสร้างเป็น Executable เรียบร้อยแล้ว!",
                         "color": 3066993,
                         "fields": [
-                            {"name": "File Name", "value": script_name, "inline": True},
-                            {"name": "Status", "value": "Success", "inline": True}
+                            {"name": "ชื่อไฟล์", "value": script_name, "inline": True},
+                            {"name": "สถานะ", "value": "สำเร็จ", "inline": True}
                         ],
                         "footer": {"text": "Generated by PyInstaller"}
                     }
@@ -105,8 +146,10 @@ def generate_executable():
             except requests.exceptions.RequestException as e:
                 print(f"เกิดข้อผิดพลาดในการส่งข้อมูลไปที่ Webhook: {e}")
 
+    except ValueError:
+        print("กรุณากรอกหมายเลขไฟล์ที่ถูกต้อง.")
     except Exception as e:
-        print(f'Error generating executable: {e}')
+        print(f'เกิดข้อผิดพลาด: {e}')
 
 def show_menu():
     show_files()
