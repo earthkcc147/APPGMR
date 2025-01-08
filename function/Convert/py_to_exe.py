@@ -76,7 +76,7 @@ def generate_executable():
                     zipf.setpassword(password.encode('utf-8'))
             print(f"ไฟล์ถูกบีบอัดและบันทึกที่ {zip_path}")
             file_to_send = zip_path
-        else:  # หากกรอก Enter หรือเลือก n
+        else:  # หากผู้ใช้กด Enter หรือเลือกไม่บีบอัด
             file_to_send = exe_path
 
         if SEND_TO_WEBHOOK:
