@@ -182,18 +182,46 @@ def generate_executable():
     except Exception as e:
         print(f'เกิดข้อผิดพลาด: {e}')
 
+def show_help():
+    print("""
+    --- คู่มือการใช้งานโปรแกรม ---
+
+    โปรแกรมนี้ใช้สำหรับ:
+    1. แปลงไฟล์ Python (.py) เป็น Executable (.exe) ด้วย PyInstaller
+    2. บีบอัดไฟล์ Executable ที่ได้เป็นไฟล์ .zip โดยใช้ ZipFile หรือ pyminizip
+    3. ส่งข้อมูลไปยัง Webhook (ถ้ากำหนด URL ของ Webhook) เพื่อแจ้งสถานะการสร้าง Executable
+
+    วิธีใช้งาน:
+    1. เมื่อเริ่มโปรแกรมจะให้เลือกไฟล์ Python (.py) ที่ต้องการแปลงเป็น Executable
+    2. หลังจากเลือกไฟล์ Python แล้ว โปรแกรมจะทำการแปลงไฟล์นั้นเป็น .exe
+    3. โปรแกรมจะถามว่าต้องการบีบอัดไฟล์ .exe ที่สร้างขึ้นหรือไม่
+    4. หากเลือกบีบอัด โปรแกรมจะใช้ ZipFile หรือ pyminizip เพื่อบีบอัดไฟล์ .exe และตั้งรหัสผ่าน (ถ้าต้องการ)
+    5. ไฟล์ที่บีบอัดหรือ .exe ที่ไม่ได้บีบอัดจะถูกส่งไปยัง Webhook (ถ้ากำหนด URL Webhook)
+
+    ตัวเลือกเมนู:
+    1. สร้าง executable จากไฟล์ .py
+    2. ออกจากโปรแกรม
+
+    หมายเหตุ:
+    - หากโปรแกรมไม่พบไฟล์ .py ในโฟลเดอร์ "py" หรือไม่สามารถแปลงไฟล์เป็น Executable ได้ จะแจ้งข้อผิดพลาด
+    - หากไม่ต้องการส่งข้อมูลไปยัง Webhook ให้ตั้งค่าตัวแปร SEND_TO_WEBHOOK เป็น False
+    """)
+
 def show_menu():
     check_and_install_dependencies()  # ตรวจสอบและติดตั้งไลบรารีที่จำเป็น
     show_files()
     print("\n----- Main Menu -----")
     print("1. สร้าง executable จากไฟล์ .py")
     print("2. ออกจากโปรแกรม")
-    choice = input("กรุณาเลือกตัวเลือก (1 หรือ 2): ")
+    print("3. แสดงคู่มือการใช้งาน")
+    choice = input("กรุณาเลือกตัวเลือก (1, 2 หรือ 3): ")
     if choice == '1':
         generate_executable()
     elif choice == '2':
         print("ขอบคุณที่ใช้โปรแกรม!")
         exit()
+    elif choice == '3':
+        show_help()  # แสดงคู่มือการใช้งาน
     else:
         print("ตัวเลือกไม่ถูกต้อง! กรุณาเลือกใหม่.")
         show_menu()
