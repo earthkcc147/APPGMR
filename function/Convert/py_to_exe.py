@@ -12,8 +12,8 @@ WEBHOOK_URL = "https://example.com/webhook"  # เปลี่ยนเป็น
 REMOVE_SPEC = True
 REMOVE_BUILD = True
 
-# สร้างโฟลเดอร์ py_to_exe ถ้ายังไม่มี
-PY_TO_EXE_DIR = 'py_to_exe'
+# สร้างโฟลเดอร์ py ถ้ายังไม่มี
+PY_TO_EXE_DIR = 'py'
 EXE_DIR = 'exe'  # โฟลเดอร์สำหรับเก็บไฟล์ .exe
 
 def create_directory():
@@ -26,9 +26,9 @@ def show_files():
     create_directory()
     py_files = [f for f in os.listdir(PY_TO_EXE_DIR) if f.endswith('.py')]
     if not py_files:
-        print("ไม่พบไฟล์ .py ในโฟลเดอร์ py_to_exe")
+        print("ไม่พบไฟล์ .py ในโฟลเดอร์ py")
     else:
-        print("ไฟล์ .py ที่พบใน py_to_exe:")
+        print("ไฟล์ .py ที่พบใน py:")
         for idx, file in enumerate(py_files, 1):
             print(f"{idx}. {file}")
 
@@ -36,10 +36,10 @@ def generate_executable():
     create_directory()
     py_files = [f for f in os.listdir(PY_TO_EXE_DIR) if f.endswith('.py')]
     if not py_files:
-        print("ไม่พบไฟล์ .py ในโฟลเดอร์ py_to_exe")
+        print("ไม่พบไฟล์ .py ในโฟลเดอร์ py")
         return
 
-    print("ไฟล์ .py ที่พบใน py_to_exe:")
+    print("ไฟล์ .py ที่พบใน py:")
     for idx, file in enumerate(py_files, 1):
         print(f"{idx}. {file}")
 
