@@ -1,7 +1,9 @@
 import os
 import requests
+import subprocess
 from shutil import rmtree
 from zipfile import ZipFile, ZIP_DEFLATED
+import pyminizip  # นำเข้าไลบรารี pyminizip
 
 # กำหนดการเปิด/ปิดการส่งข้อมูลไปยัง Webhook
 SEND_TO_WEBHOOK = True
@@ -15,6 +17,26 @@ REMOVE_BUILD = True
 # สร้างโฟลเดอร์ py ถ้ายังไม่มี
 PY_TO_EXE_DIR = 'py' # โฟลเดอร์สำหรับเก็บไฟล์ .py
 EXE_DIR = 'exe'  # โฟลเดอร์สำหรับเก็บไฟล์ .exe
+
+def install_package(package):
+    try:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+        print(f"ติดตั้ง {package} เรียบร้อยแล้ว")
+    except subprocess.CalledProcessError as e:
+        print(f"การติดตั้ง {package} ล้มเหลว: {e}")
+
+def check_and_install_dependencies():
+    try:
+        import pyinstaller
+    except ImportError:
+        print("ไม่พบ pyinstaller, กำลังติดตั้ง...")
+        install_package('pyinstaller')
+
+    try:
+        import pyminizip
+    except ImportError:
+        print("ไม่พบ pyminizip, กำลังติดตั้ง...")
+        install_package('pyminizip')
 
 def create_directory():
     if not os.path.exists(PY_TO_EXE_DIR):
@@ -34,7 +56,7 @@ def show_files():
 
 def generate_executable():
     create_directory()
-    
+
     # ตรวจสอบว่าโฟลเดอร์ py มีไฟล์ .py หรือไม่
     try:
         py_files = [f for f in os.listdir(PY_TO_EXE_DIR) if f.endswith('.py')]
@@ -107,6 +129,7 @@ def generate_executable():
             zip_name = exe_name[:-4]
             password = input("กรุณาใส่รหัสผ่านสำหรับ zip (กด Enter เพื่อไม่ตั้งรหัส): ")
             try:
+                # ใช้ ZipFile สำหรับบีบอัด
                 zip_path = os.path.join(EXE_DIR, f"{zip_name}_{password if password else 'no-pass'}.zip")
                 with ZipFile(zip_path, 'w', ZIP_DEFLATED) as zipf:
                     zipf.write(exe_path, arcname=exe_name)
@@ -115,8 +138,16 @@ def generate_executable():
                 print(f"ไฟล์ถูกบีบอัดและบันทึกที่ {zip_path}")
                 file_to_send = zip_path
             except Exception as e:
-                print(f"เกิดข้อผิดพลาดในการบีบอัดไฟล์: {e}")
-                return
+                print(f"เกิดข้อผิดพลาดในการบีบอัดไฟล์ด้วย ZipFile: {e}")
+                # หาก ZipFile ไม่สำเร็จ ให้ใช้ pyminizip
+                print("กำลังใช้ pyminizip แทน...")
+                try:
+                    pyminizip.compress(exe_path, None, zip_path, password, 5)  # ใช้ pyminizip ในการบีบอัด
+                    print(f"ไฟล์ถูกบีบอัดและบันทึกที่ {zip_path}")
+                    file_to_send = zip_path
+                except Exception as e:
+                    print(f"เกิดข้อผิดพลาดในการบีบอัดไฟล์ด้วย pyminizip: {e}")
+                    return
         else:
             file_to_send = exe_path
 
@@ -152,6 +183,7 @@ def generate_executable():
         print(f'เกิดข้อผิดพลาด: {e}')
 
 def show_menu():
+    check_and_install_dependencies()  # ตรวจสอบและติดตั้งไลบรารีที่จำเป็น
     show_files()
     print("\n----- Main Menu -----")
     print("1. สร้าง executable จากไฟล์ .py")
@@ -167,5 +199,3 @@ def show_menu():
         show_menu()
 
 show_menu()
-
-
