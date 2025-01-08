@@ -208,6 +208,7 @@ def show_help():
     """)
 
 def show_menu():
+    create_directory()  # สร้างโฟลเดอร์ py และ exe ถ้ายังไม่มี
     check_and_install_dependencies()  # ตรวจสอบและติดตั้งไลบรารีที่จำเป็น
     show_files()
     print("\n----- Main Menu -----")
