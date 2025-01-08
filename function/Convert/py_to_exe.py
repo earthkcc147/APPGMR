@@ -13,7 +13,7 @@ REMOVE_SPEC = True
 REMOVE_BUILD = True
 
 # สร้างโฟลเดอร์ py ถ้ายังไม่มี
-PY_TO_EXE_DIR = 'py'
+PY_TO_EXE_DIR = 'py' # โฟลเดอร์สำหรับเก็บไฟล์ .py
 EXE_DIR = 'exe'  # โฟลเดอร์สำหรับเก็บไฟล์ .exe
 
 def create_directory():
