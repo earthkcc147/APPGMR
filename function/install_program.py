@@ -6,6 +6,9 @@ from colorama import init, Fore, Style
 # เริ่มต้นการใช้งาน colorama
 init(autoreset=True)
 
+# ตัวแปรสำหรับกำหนดชื่อไฟล์ JSON
+json_file = 'install_git.json'
+
 # ฟังก์ชันสำหรับติดตั้งข้อมูลจาก GitHub
 def install_from_github(repo_url, repo_name, program_name):
     try:
@@ -85,18 +88,39 @@ def create_default_json(json_file):
     except Exception as e:
         print(f"{Fore.RED}⚠️ เกิดข้อผิดพลาดในการสร้างไฟล์ {json_file}: {e}")
 
+# ฟังก์ชันแสดงคำอธิบายการทำงานของโปรแกรม
+def show_program_description():
+    description = """
+    โปรแกรมนี้ช่วยในการติดตั้งโปรแกรมจาก GitHub โดยทำงานตามขั้นตอนดังนี้:
+    
+    1. อ่านไฟล์ JSON ที่มีข้อมูลโปรแกรมที่ต้องการติดตั้งจาก GitHub
+    2. ตรวจสอบว่าโฟลเดอร์โปรแกรมนั้น ๆ มีอยู่หรือไม่:
+        - หากมีอยู่แล้วจะทำการอัปเดตข้อมูลล่าสุดจาก GitHub
+        - หากไม่มี จะทำการติดตั้งโปรแกรมใหม่
+    3. หากการติดตั้งหรืออัปเดตสำเร็จ จะแสดงข้อความยืนยันการติดตั้งสำเร็จ
+    4. หากเกิดข้อผิดพลาด จะแสดงข้อความแจ้งเตือนข้อผิดพลาด
+    
+    ตัวเลือกเมนู:
+    - เลือก 1: ติดตั้งโปรแกรมจากไฟล์ JSON
+    - เลือก 2: ออกจากโปรแกรม
+    """
+    print(f"{Fore.CYAN}{description}")
+
 # ฟังก์ชันเมนูหลัก
 def main_menu():
     while True:
         print(f"\n{Fore.CYAN}===== เมนูหลัก =====")
         print(f"{Fore.YELLOW}1. ติดตั้งโปรแกรมจากไฟล์ JSON")
-        print(f"{Fore.YELLOW}2. ออกจากโปรแกรม")
+        print(f"{Fore.YELLOW}2. อธิบายการทำงานของโปรแกรม")
+        print(f"{Fore.YELLOW}3. ออกจากโปรแกรม")
         
-        choice = input(f"\n{Fore.GREEN}กรุณาเลือกตัวเลือก (1/2): ")
+        choice = input(f"\n{Fore.GREEN}กรุณาเลือกตัวเลือก (1/2/3): ")
 
         if choice == '1':
-            install_programs_from_json('install_git.json')
+            install_programs_from_json(json_file)
         elif choice == '2':
+            show_program_description()
+        elif choice == '3':
             print(f"{Fore.RED}ออกจากโปรแกรม...")
             break
         else:
