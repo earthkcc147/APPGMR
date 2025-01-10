@@ -127,62 +127,60 @@ def view_log():
 def explain_program():
     print("\n=== อธิบายความสามารถของโปรแกรม ===")
     print("โปรแกรมนี้เป็นเครื่องมือที่ใช้สำหรับควบคุมและจัดการโปรเจกต์ GitHub ผ่านคำสั่งต่างๆ ในระบบ Git ได้แก่:")
-    print("1. เข้าสู่ระบบ GitHub ด้วยชื่อผู้ใช้งานและรหัสผ่าน")
-    print("2. โคลน (clone) repository จาก GitHub ลงในเครื่องของผู้ใช้")
-    print("3. Commit การเปลี่ยนแปลงที่ทำในไฟล์ต่างๆ ใน repository")
-    print("4. Push การเปลี่ยนแปลงที่ commit ไปยัง GitHub")
-    print("5. Pull การเปลี่ยนแปลงจาก GitHub มายังเครื่องของผู้ใช้")
-    print("6. ดูสถานะของ repository ว่ามีการเปลี่ยนแปลงอะไรบ้าง")
-    print("7. สร้าง branch ใหม่ใน repository เพื่อการพัฒนาแยกต่างหาก")
-    print("8. ทำการ merge ข้อมูลจาก branch หนึ่งเข้ากับ branch ปัจจุบัน")
-    print("9. ลบไฟล์ที่ไม่ต้องการใน repository")
-    print("10. ดู log ของ commit ที่ได้ทำไว้ใน repository")
+    print("1. โคลน (clone) repository จาก GitHub ลงในเครื่องของผู้ใช้")
+    print("2. Commit การเปลี่ยนแปลงที่ทำในไฟล์ต่างๆ ใน repository")
+    print("3. Push การเปลี่ยนแปลงที่ commit ไปยัง GitHub")
+    print("4. Pull การเปลี่ยนแปลงจาก GitHub มายังเครื่องของผู้ใช้")
+    print("5. ดูสถานะของ repository ว่ามีการเปลี่ยนแปลงอะไรบ้าง")
+    print("6. สร้าง branch ใหม่ใน repository เพื่อการพัฒนาแยกต่างหาก")
+    print("7. ทำการ merge ข้อมูลจาก branch หนึ่งเข้ากับ branch ปัจจุบัน")
+    print("8. ลบไฟล์ที่ไม่ต้องการใน repository")
+    print("9. ดู log ของ commit ที่ได้ทำไว้ใน repository")
     print("โปรแกรมนี้ใช้การควบคุม Git ผ่านคำสั่งต่างๆ เพื่อช่วยให้ผู้ใช้สามารถจัดการ repository ได้อย่างง่ายดาย")
+
 
 def main_menu():
     # เรียกฟังก์ชั่น login ก่อน
     login()
+    explain_program()
 
     print("\n=== เมนูหลัก ===")
-    print("1. เข้าสู่ระบบ GitHub")
-    print("2. โคลน repository")
-    print("3. Commit การเปลี่ยนแปลง")
-    print("4. Push การเปลี่ยนแปลงไปยัง GitHub")
-    print("5. Pull การเปลี่ยนแปลงจาก GitHub")
-    print("6. ดูสถานะของ repository")
-    print("7. สร้าง branch ใหม่")
-    print("8. Merge branch")
-    print("9. ลบไฟล์ที่ไม่ต้องการ")
-    print("10. ดู log ของ commit")
-    print("11. อธิบายความสามารถของโปรแกรม")
-    print("12. ออกจากโปรแกรม")
+    print("1. โคลน repository")
+    print("2. Commit การเปลี่ยนแปลง")
+    print("3. Push การเปลี่ยนแปลงไปยัง GitHub")
+    print("4. Pull การเปลี่ยนแปลงจาก GitHub")
+    print("5. ดูสถานะของ repository")
+    print("6. สร้าง branch ใหม่")
+    print("7. Merge branch")
+    print("8. ลบไฟล์ที่ไม่ต้องการ")
+    print("9. ดู log ของ commit")
+    print("10. อธิบายความสามารถของโปรแกรม")
+    print("11. ออกจากโปรแกรม")
 
     while True:
-        choice = input("กรุณาเลือกหมายเลข (1-12): ")
-        
+        choice = input("กรุณาเลือกหมายเลข (1-11): ")
+
         if choice == '1':
-            login()
-        elif choice == '2':
             clone_repo()
-        elif choice == '3':
+        elif choice == '2':
             commit_changes()
-        elif choice == '4':
+        elif choice == '3':
             push_changes()
-        elif choice == '5':
+        elif choice == '4':
             pull_changes()
-        elif choice == '6':
+        elif choice == '5':
             status()
-        elif choice == '7':
+        elif choice == '6':
             create_branch()
-        elif choice == '8':
+        elif choice == '7':
             merge_branch()
-        elif choice == '9':
+        elif choice == '8':
             remove_file()
-        elif choice == '10':
+        elif choice == '9':
             view_log()
-        elif choice == '11':
+        elif choice == '10':
             explain_program()
-        elif choice == '12':
+        elif choice == '11':
             print("ออกจากโปรแกรม...")
             break
         else:
