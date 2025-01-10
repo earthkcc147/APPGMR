@@ -139,8 +139,10 @@ def explain_program():
     print("10. ดู log ของ commit ที่ได้ทำไว้ใน repository")
     print("โปรแกรมนี้ใช้การควบคุม Git ผ่านคำสั่งต่างๆ เพื่อช่วยให้ผู้ใช้สามารถจัดการ repository ได้อย่างง่ายดาย")
 
-
 def main_menu():
+    # เรียกฟังก์ชั่น login ก่อน
+    login()
+
     print("\n=== เมนูหลัก ===")
     print("1. เข้าสู่ระบบ GitHub")
     print("2. โคลน repository")
@@ -188,10 +190,3 @@ def main_menu():
 
 if __name__ == "__main__":
     main_menu()
-
-
-
-
-
-
-แสดงฟังก์ชั่น explain program 
